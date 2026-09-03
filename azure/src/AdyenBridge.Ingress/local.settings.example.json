@@ -1,0 +1,14 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "ServiceBus__fullyQualifiedNamespace": "example.servicebus.windows.net",
+    "WebhookQueueName": "adyen-webhook-events",
+    "Ingress__RequireEasyAuthPrincipal": "false",
+    "Adyen__MerchantAccount": "YOUR_MERCHANT",
+    "Adyen__Environment": "test",
+    "Adyen__HmacKeys__0": "HEX_HMAC_KEY"
+  }
+}
+

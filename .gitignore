@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+**/.azurefunctions/
+**/local.settings.json
+**/.alpackages/
+**/*.app
+**/TestResults/
+.vs/
+.tools/
+.vscode/.alcache/
+infra/*.bicepparam

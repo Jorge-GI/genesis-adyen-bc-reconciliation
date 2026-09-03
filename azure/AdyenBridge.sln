@@ -1,0 +1,50 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdyenBridge.Contracts", "src\AdyenBridge.Contracts\AdyenBridge.Contracts.csproj", "{7843F411-8A5B-44A4-A18C-0A95F1A19001}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdyenBridge.Application", "src\AdyenBridge.Application\AdyenBridge.Application.csproj", "{7843F411-8A5B-44A4-A18C-0A95F1A19002}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdyenBridge.Infrastructure", "src\AdyenBridge.Infrastructure\AdyenBridge.Infrastructure.csproj", "{7843F411-8A5B-44A4-A18C-0A95F1A19003}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdyenBridge.Ingress", "src\AdyenBridge.Ingress\AdyenBridge.Ingress.csproj", "{7843F411-8A5B-44A4-A18C-0A95F1A19004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdyenBridge.Worker", "src\AdyenBridge.Worker\AdyenBridge.Worker.csproj", "{7843F411-8A5B-44A4-A18C-0A95F1A19005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdyenBridge.Application.Tests", "tests\AdyenBridge.Application.Tests\AdyenBridge.Application.Tests.csproj", "{7843F411-8A5B-44A4-A18C-0A95F1A19006}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7843F411-8A5B-44A4-A18C-0A95F1A19001}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19001}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19001}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19001}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19002}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19002}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19002}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19002}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19003}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19003}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19003}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7843F411-8A5B-44A4-A18C-0A95F1A19006}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
+

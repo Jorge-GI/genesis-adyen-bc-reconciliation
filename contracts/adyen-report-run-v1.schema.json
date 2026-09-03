@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-import.example/contracts/adyen-report-run-v1.schema.json",
+  "title": "Adyen report run v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["externalReportId", "fileHash", "reportDate", "state", "totalRowCount", "relevantRowCount", "loadedRowCount", "archiveReference"],
+  "properties": {
+    "externalReportId": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "fileHash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+    "reportDate": { "type": "string", "format": "date" },
+    "state": { "enum": ["Loading", "Ready", "Error"] },
+    "totalRowCount": { "type": "integer", "minimum": 0 },
+    "relevantRowCount": { "type": "integer", "minimum": 0 },
+    "loadedRowCount": { "type": "integer", "minimum": 0 },
+    "archiveReference": { "type": "string", "maxLength": 2048 },
+    "errorMessage": { "type": "string", "maxLength": 2048 }
+  }
+}
+

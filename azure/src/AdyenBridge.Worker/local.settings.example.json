@@ -1,0 +1,21 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "ServiceBus__fullyQualifiedNamespace": "example.servicebus.windows.net",
+    "WebhookQueueName": "adyen-webhook-events",
+    "ReportQueueName": "adyen-report-jobs",
+    "BlobServiceUri": "https://example.blob.core.windows.net",
+    "BusinessCentral__TenantId": "00000000-0000-0000-0000-000000000000",
+    "BusinessCentral__EnvironmentName": "sandbox",
+    "BusinessCentral__CompanyId": "00000000-0000-0000-0000-000000000000",
+    "BusinessCentral__ClientId": "00000000-0000-0000-0000-000000000000",
+    "BusinessCentral__ClientSecret": "SECRET_FROM_KEY_VAULT_REFERENCE",
+    "Reports__Username": "REPORT_USER",
+    "Reports__Password": "SECRET_FROM_KEY_VAULT_REFERENCE",
+    "Reports__AllowedHosts__0": "ca-test.adyen.com",
+    "Reports__Environment": "test",
+    "Reports__TimeZoneId": "Europe/Berlin"
+  }
+}

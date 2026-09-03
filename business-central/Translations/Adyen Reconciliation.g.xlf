@@ -1,0 +1,859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="Adyen Reconciliation">
+    <body>
+      <group id="body">
+        <trans-unit id="Table 2204015683 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Inbox Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 636392376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Amount</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Amount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 4198939294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Currency Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Currency Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 1317552199 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Environment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Environment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 401751910 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Error</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Last Error - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3233536996 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Logical Event Key</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Logical Event Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 2505989037 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Merchant Account</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Merchant Account - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 2387579523 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Merchant Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Merchant Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3880909165 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Message Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Message Type - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 2438994984 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Occurred At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Occurred At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3416705971 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Original PSP Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Original PSP Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 527407104 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payload Hash</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Payload Hash - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3566004263 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Method</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Payment Method - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 2657475871 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Processed At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3717170828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PSP Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field PSP Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 1339838175 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Raw Archive Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Raw Archive Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 774794796 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Received At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Received At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 2907981782 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Row Identity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Report Row Identity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3895696350 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Run ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Report Run ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3577092237 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Retry Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Retry Count - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 1686839260 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shopper Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Shopper Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 2397723431 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Source - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3878926381 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Success</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Success - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 3158794184 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Success Provided</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Success Provided - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2204015683 - Field 664864458 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transport ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Inbox Entry - Field Transport ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2409506742 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Payment Method Policy</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Payment Method Policy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2409506742 - Field 3461834954 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Description</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Payment Method Policy - Field Description - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2409506742 - Field 3586455891 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enabled for Auto Post</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Payment Method Policy - Field Enabled for Auto Post - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2409506742 - Field 3566004263 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Method</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Payment Method Policy - Field Payment Method - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 2409506742 - Field 2582833491 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Verified At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Payment Method Policy - Field Verified At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Report Run</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 3922524187 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Archive Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Archive Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 2852966117 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Error Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 3632573298 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Report ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field External Report ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 904953648 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>File Hash</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field File Hash - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 2982107418 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loaded Row Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Loaded Row Count - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 2657475871 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Processed At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 3478757104 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ready At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Ready At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 3938923630 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Relevant Row Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Relevant Row Count - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 890645542 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Report Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 2733772010 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Started At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Started At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 3729243916 - Field 76203789 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Row Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Report Run - Field Total Row Count - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 975647865 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Auto Post</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Auto Post - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 3268277277 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Clearing G/L Account No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Clearing G/L Account No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 2891538263 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Enabled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Enabled - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 1317552199 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Environment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Environment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 2704330142 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Automatic Journal Batch Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Journal Batch Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 3684440170 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Journal Template Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Journal Template Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 1599054213 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Last Ready Report Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Last Ready Report Date - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 1646504844 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manual Journal Batch Name</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Manual Journal Batch Name - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 2505989037 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Merchant Account</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Merchant Account - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 1663593181 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Primary Key</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Primary Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 2077018585 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Raw Retention Days</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Raw Retention Days - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 1910193853 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Alert Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Report Alert Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 1759324960 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Deadline</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Report Deadline - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 3471140152 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Overdue</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Report Overdue - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 862980548 - Field 644274891 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Retention Months</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Adyen Setup - Field Report Retention Months - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imported Adyen Payment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 636392376 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Amount</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Amount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 1500048967 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Backfilled from report</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Backfilled - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 3068142913 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Created At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Created At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 4198939294 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Currency Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Currency Code - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 2227334116 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Event Date-Time</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Event Date-Time - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 1207076200 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Exception Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Exception Message - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 2762051332 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Latest Event At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Latest Event At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 91108197 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Latest Logical Event Key</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Latest Logical Event Key - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 654733145 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manual Journal Batch</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Manual Journal Batch - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 2073714102 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manual Journal Line No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Manual Journal Line No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 959437949 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manual Journal Template</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Manual Journal Template - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 121010622 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Match Result</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Match Result - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 2758784884 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Matched Invoice Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Matched Invoice Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 2387579523 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Merchant Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Merchant Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 4036039274 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Modified At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Modified At UTC - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 2368708283 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Origin Source</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Origin Source - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 3566004263 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Method</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Payment Method - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 1786465012 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posted Payment Entry No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Posted Payment Entry No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 3717170828 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PSP Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field PSP Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 750972734 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Report Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 2120259541 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Resolved Customer No.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Resolved Customer No. - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 1686839260 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shopper Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Shopper Reference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 513339096 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Table 1371112931 - Field 3361698953 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status Before Manual</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Table Imported Adyen Payment - Field Status Before Manual - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Inbound Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Inbound Messages</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1121446808 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Amount</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control amount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1808640270 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Currency Code</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control currencyCode - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 696194151 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Environment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control environment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1412029892 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Logical Event Key</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control logicalEventKey - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1918573109 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Merchant Account</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control merchantAccount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 2263789595 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Merchant Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control merchantReference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 3530006685 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Message Type</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control messageType - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 2265024576 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Occurred At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control occurredAtUtc - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 2768943371 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Original PSP Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control originalPspReference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 2425717512 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payload Hash</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control payloadHash - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 3864418687 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Payment Method</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control paymentMethod - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1900504092 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>PSP Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control pspReference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 2807126847 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Raw Archive Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control rawArchiveReference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 269490308 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Received At UTC</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control receivedAtUtc - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1054946662 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Row Identity</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control reportRowIdentity - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1316756022 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Run ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control reportRunId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 2063065324 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Shopper Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control shopperReference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1249153543 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Source</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control source - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 998393528 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control status - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 2431436109 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Success</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control success - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 3321423032 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Success Provided</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control successProvided - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 578000630 - Control 1623934714 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Transport ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbound Messages API - Control transportId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4085823481 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Inbox Entries</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbox Entries - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4085823481 - Action 3488904508 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Retry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Inbox Entries - Action Retry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4164066811 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Payment Exceptions</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Exceptions - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 4164066811 - Action 1270238665 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Manual Journal Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Exceptions - Action CreateManualJournal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 3804862920 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Payment Method Policies</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Method Policies - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 2410387117 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Report Runs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Property 3446740159" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Report Run</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Property EntityCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Property 631549417" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Report Runs</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Property EntitySetCaption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 4071168083 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Archive Reference</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control archiveReference - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 2159047821 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error Message</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control errorMessage - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 374189186 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>External Report ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control externalReportId - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 483298488 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>File Hash</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control fileHash - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 2354699498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loaded Row Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control loadedRowCount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 1750192126 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Relevant Row Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control relevantRowCount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 4179897230 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report Date</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control reportDate - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 1405163793 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>State</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control state - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 410202181 - Control 1883560829 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Total Row Count</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Report Runs API - Control totalRowCount - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 862980548 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen Setup</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Setup - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 862980548 - Control 2445482498 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Setup - Control General - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 862980548 - Control 2808404044 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posting</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Setup - Control Posting - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 862980548 - Control 2176459415 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reports</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Setup - Control Reports - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 862980548 - Action 3994974970 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Job Queue Entry</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Setup - Action CreateJobQueueEntry - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1676656878 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imported Adyen Payments</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1676656878 - Action 1270238665 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Create Manual Journal Line</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action CreateManualJournal - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1676656878 - Action 3772244409 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Posted Payment</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action OpenPostedPayment - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1676656878 - Action 4140168924 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Post Exact Match</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action PostExactMatch - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Page 1676656878 - Action 3828387217 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Re-evaluate Match</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action ReevaluateMatch - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="TableExtension 1676703150 - Field 4108080812 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve" al-object-target="Table 1806786327">
+          <source>Adyen Payment ID</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">TableExtension Adyen Gen. Journal Line - Field Adyen Payment ID - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3736606942 - EnumValue 1743492210 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Live</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Environment - EnumValue Live - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 3736606942 - EnumValue 3732224266 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Test</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Environment - EnumValue Test - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1209938587 - EnumValue 2248886284 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Inbox Status - EnumValue Error - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1209938587 - EnumValue 3813266888 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ignored</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Inbox Status - EnumValue Ignored - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1209938587 - EnumValue 3208180638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Inbox Status - EnumValue Processed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1209938587 - EnumValue 3862845261 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processing</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Inbox Status - EnumValue Processing - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1209938587 - EnumValue 3292759961 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Received</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Inbox Status - EnumValue Received - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4001624527 - EnumValue 740906511 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Invalid customer</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Match Result - EnumValue InvalidCustomer - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4001624527 - EnumValue 51463044 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Multiple matches</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Match Result - EnumValue Multiple - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4001624527 - EnumValue 3371220206 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>No match</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Match Result - EnumValue None - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4001624527 - EnumValue 889412400 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Not run</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Match Result - EnumValue NotRun - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4001624527 - EnumValue 3080713340 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unique exact</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Match Result - EnumValue UniqueExact - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4001624527 - EnumValue 3767245782 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Unsupported payment method</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Match Result - EnumValue UnsupportedMethod - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1105263691 - EnumValue 2248886284 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Payment Status - EnumValue Error - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1105263691 - EnumValue 281352744 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Imported</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Payment Status - EnumValue Imported - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1105263691 - EnumValue 3343149773 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manual journal created</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Payment Status - EnumValue ManualJournalCreated - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1105263691 - EnumValue 4099138999 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Manually reconciled</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Payment Status - EnumValue ManuallyReconciled - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1105263691 - EnumValue 1420052240 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Posted and applied</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Payment Status - EnumValue PostedApplied - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1105263691 - EnumValue 1954014948 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ready to post</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Payment Status - EnumValue ReadyToPost - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1105263691 - EnumValue 3947356603 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Reversal required</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Payment Status - EnumValue ReversalRequired - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4261308712 - EnumValue 2248886284 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Run Status - EnumValue Error - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4261308712 - EnumValue 1017188834 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Loading</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Run Status - EnumValue Loading - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4261308712 - EnumValue 3208180638 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Run Status - EnumValue Processed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4261308712 - EnumValue 3862845261 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Processing</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Run Status - EnumValue Processing - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4261308712 - EnumValue 2521603205 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Ready</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Run Status - EnumValue Ready - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4144966391 - EnumValue 4141588837 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Confirmed</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Status - EnumValue Confirmed - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4144966391 - EnumValue 2584747713 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Discrepancy</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Status - EnumValue Discrepancy - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 4144966391 - EnumValue 2923064934 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Not received</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Report Status - EnumValue NotReceived - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1151515110 - EnumValue 3375155882 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Report</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Source - EnumValue Report - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="Enum 1151515110 - EnumValue 2662136021 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Webhook</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Enum Adyen Source - EnumValue Webhook - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 4192954868 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen administrator</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet ADYEN ADMIN - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 2386020137 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen finance operator</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet ADYEN FINANCE - Property Caption</note>
+        </trans-unit>
+        <trans-unit id="PermissionSet 3087718478 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Adyen API service</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">PermissionSet ADYEN SERVICE - Property Caption</note>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

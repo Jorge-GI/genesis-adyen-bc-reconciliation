@@ -1,0 +1,33 @@
+{
+  "id": "8d42ce86-f04f-4c45-bec4-315451f469d4",
+  "name": "Adyen Reconciliation",
+  "publisher": "Genesis Import GmbH",
+  "version": "1.0.0.0",
+  "brief": "Imports Adyen payment events and reconciles them with customer invoices.",
+  "description": "Webhook and accounting-report inbox, payment matching, posting, manual exceptions, and report confirmation for Adyen merchant payments.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "idRanges": [
+    {
+      "from": 72000,
+      "to": 72149
+    }
+  ],
+  "runtime": "16.0",
+  "features": [
+    "NoImplicitWith",
+    "TranslationFile"
+  ],
+  "resourceExposurePolicy": {
+    "allowDebugging": false,
+    "allowDownloadingSource": false,
+    "includeSourceInSymbolFile": false
+  }
+}
