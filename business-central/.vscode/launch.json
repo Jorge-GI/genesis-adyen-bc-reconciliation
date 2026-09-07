@@ -1,0 +1,20 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Microsoft cloud sandbox july",
+            "request": "launch",
+            "type": "al",
+            "environmentType": "Sandbox",
+            "environmentName": "Sandbox-21072026",
+            "startupObjectId": 70416,
+            "startupObjectType": "Page",
+            "startupCompany": "Genesis Import",
+            "schemaUpdateMode": "ForceSync",
+            "breakOnError": "None",
+            "launchBrowser": false,
+            "enableLongRunningSqlStatements": true,
+            "enableSqlInformationDebugger": true
+        }
+    ]
+}

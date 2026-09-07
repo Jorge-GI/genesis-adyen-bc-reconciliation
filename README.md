@@ -16,7 +16,8 @@ The main happy path is:
 
 Business Central object allocation: `72000–72149` for the production app and `72150–72200` for the test app.
 
-See [architecture.md](docs/architecture.md), [setup.md](docs/setup.md), and [operations.md](docs/operations.md).
+See the [architecture](docs/architecture.md), [installation and configuration guide](docs/setup.md),
+[testing and validation guide](docs/testing-validation.md), and [operations guide](docs/operations.md).
 
 ## Build
 

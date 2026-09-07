@@ -2,6 +2,10 @@
 
 Automate these cases in the target tenant's standard AL test framework when its Test Toolkit dependency IDs are available.
 
+The executable end-to-end procedures, evidence requirements, pass criteria, and sign-off record are maintained in the
+[testing and validation guide](../../docs/testing-validation.md). This file remains the backlog for future AL test automation
+and must not be treated as release approval by itself.
+
 | Area | Cases |
 |---|---|
 | Customer resolution | Exact customer, missing customer, blocked customer, finance override |
