@@ -1,0 +1,23 @@
+{
+  "live": "false",
+  "notificationItems": [
+    {
+      "NotificationRequestItem": {
+        "additionalData": {
+          "hmacSignature": "qS7yprqdLtoeTZhNwgeeqg6+nocTFWUR1yHts63H3pM="
+        },
+        "amount": {
+          "currency": "EUR",
+          "value": 0
+        },
+        "eventCode": "REPORT_AVAILABLE",
+        "eventDate": "2026-09-04T06:00:00Z",
+        "merchantAccountCode": "GenesisMerchant",
+        "merchantReference": "",
+        "pspReference": "report_2026_09_03.csv",
+        "reason": "https://ca-test.adyen.com/reports/download/report_2026_09_03.csv",
+        "success": "true"
+      }
+    }
+  ]
+}

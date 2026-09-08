@@ -1,75 +1,68 @@
-# Architecture and information flow
+# Architecture
 
-## Deployment boundary
+## Boundary and ownership
 
-```mermaid
-flowchart TD
-    A[Adyen Standard webhook] --> I
-    subgraph Public Azure boundary
-        I[Ingress Function<br/>Easy Auth OAuth + HMAC]
-        IH[(Ingress-only host storage)]
-        IK[(Ingress HMAC vault)]
-    end
-    I -->|enqueue before 202| Q[(Service Bus webhook queue)]
-    Q --> W
-    subgraph Private processing boundary
-        W[Webhook worker]
-        RP[Report worker]
-        B[(Encrypted Blob archive)]
-        WH[(Worker-only host storage)]
-        WK[(Worker credential vault)]
-    end
-    W --> B
-    W -->|REPORT_AVAILABLE| RQ[(Service Bus report queue)]
-    RQ --> RP
-    RP --> B
-    I -. runtime state .-> IH
-    I -. HMAC keys .-> IK
-    W -. runtime state .-> WH
-    W -. BC/report secrets .-> WK
-    W -->|S2S OAuth| API
-    RP -->|S2S OAuth| API
-    subgraph Business Central company
-        API[Versioned custom APIs<br/>persistence only]
-        API --> IN[(Adyen Inbox)]
-        IN --> J[Recurring Job Queue]
-        J --> P[(Imported Adyen Payment)]
-        P --> M[Exact invoice matcher]
-        M --> POST[Payment journal posting/application]
-        P --> MAN[Finance-created manual draft]
-        J --> RC[Report reconciler]
-    end
+Power Automate owns only public HTTP ingress and the synchronous response to Adyen. Business Central owns all business and security decisions after the payload reaches the connector.
+
+```text
+Adyen Standard webhook
+        |
+        v
+Power Automate (one flow per BC company)
+        |
+        v
+POST genesisimport/adyen/v1.0/adyenWebhookRequests
+        |
+        +-- synchronous: size + JSON + environment + merchant + HMAC + atomic raw insert
+        |
+        v
+BC Job Queue dispatcher
+        |
+        +-- raw request worker -> normalized webhook events
+        +-- report worker -> HTTPS allowlist + Basic Auth + CSV BLOB + normalized rows
+        +-- event worker -> lifecycle state + matching + optional posting/application
+        +-- deadline monitor + content-only retention
 ```
 
-## Event processing
+There are no runtime services between Power Automate and BC and no external persistence tier.
 
-1. App Service Authentication validates the OAuth access token supplied by Adyen.
-2. The ingress reads at most the configured request size, verifies every item's Adyen HMAC with the current or previous key, and checks merchant and test/live environment.
-3. It hashes the exact received request and creates each transport ID from that hash plus the notification-item position. It enqueues the raw envelope and returns `202` only after Service Bus accepts every item.
-4. The worker archives the exact request body, converts minor units to an exact major-unit decimal, and posts the v1 inbound contract to Business Central.
-5. The Business Central API validates the one-to-one merchant/environment mapping and inserts the inbox record. It does no matching or posting.
-6. The Job Queue processes at most 50 messages per invocation, committing each message independently. Errors are stored on the inbox entry and can be retried.
-7. A successful `AUTHORISATION` upserts the payment aggregate by original PSP reference. An older success cannot replace a newer state, and an adverse state is never cleared automatically.
-8. Automatic posting requires an enabled method, a valid unblocked customer from `shopperReference`, and exactly one open invoice with identical normalized currency and remaining amount.
-9. Posting and invoice application run in a single transaction. The imported record stores the resulting customer ledger entry.
+## Data model
 
-## Report processing
+| Record | Identity and purpose |
+| --- | --- |
+| Adyen Setup | Company singleton with environment, limits, report host allowlist/deadline, retention, and credential-presence flags. |
+| Adyen Merchant | Merchant account key with enabled state, automatic/manual journal batches, clearing account, Auto Post, last-ready report, and overdue state. |
+| Adyen Webhook Request | Auto-number plus unique payload SHA-256, BLOB envelope, received/processed timestamps, correlation, status, retries, and error. |
+| Adyen Event Entry | SHA-256 transport and logical identities for webhook items and report rows, normalized payment/lifecycle data, status, retries, and source links. |
+| Adyen Report Run | Merchant plus unique external report ID, URL, original CSV BLOB, file hash, date/counts/status/retries, and audit timestamps. |
+| Imported Adyen Payment | Unique merchant plus original PSP reference, immutable source data, customer/match state, report state, journal link, and ledger link. |
+| Adyen Payment Method Policy | Company-wide allowlist controlling methods eligible for automatic matching/posting. |
 
-`REPORT_AVAILABLE` follows the same authenticated ingress. The private worker validates every download/redirect host, downloads with the Adyen report credential, hashes and archives the complete file, and derives the daily report date from Adyen's filename. Files containing no date or a multi-day range are rejected. It creates a `Loading` report run, parses columns by name, and uploads relevant rows. Only after every relevant row is accepted does it patch the run to `Ready`.
+Current/previous HMAC keys and the shared report username/password are `SecretText` values in encrypted, company-scoped `IsolatedStorage`. They are never fields and cannot be read back through a page or API.
 
-Business Central ignores rows belonging to non-ready runs. `SentForSettle` with `abs(Captured (PC))` confirms an existing payment or backfills a missed webhook. Customer, currency, or amount differences become discrepancies and never overwrite source data.
+## Integrity and transaction boundaries
 
-After the configured CET/CEST deadline, the Job Queue expects the previous calendar day's daily report. A missing report sets an operational exception and emits extension telemetry once per overdue period.
+- The raw request API validates every notification item before one insert is committed. It performs no journal work.
+- A supplied Power Automate flow-run ID may be retried with the same payload only. Reuse with another payload hash is rejected. An identical payload delivered through another run resolves idempotently to the retained raw request.
+- Payload, transport, logical-event, report-file, and report-row identities use SHA-256. Webhook retransmissions remain auditable while the merchant-qualified payment key prevents duplicate accounting.
+- The dispatcher invokes dedicated `Codeunit.Run` workers. Each raw request, report, and event is its own database transaction. On error the worker transaction rolls back before the dispatcher records retry/error state.
+- A report is `Ready` only after every relevant row has loaded. Report events are not eligible for reconciliation while the run is `Requested`, `Downloading`, `Loading`, or `Error`.
+- Posting and exact invoice application run under `CommitBehavior::Error`. The posted customer entry is linked through the Adyen payment SystemId carried on the journal line.
 
-## Idempotency
+## Matching and lifecycle policy
 
-- Transport ID identifies an exact request payload plus its notification-item position and is the Service Bus message ID and Business Central inbox primary key.
-- Logical event key groups retransmissions that have different event timestamps.
-- Original payment PSP reference is the payment aggregate primary key.
-- File hash plus row number and canonical row hash identify report rows.
-- Existing transport IDs and report IDs are accepted only when their hashes agree.
-- Customer-ledger document-number checks provide a final accounting guard before posting.
+`shopperReference` maps directly to Customer No. An automatic match requires an enabled payment-method policy, an unblocked customer, and exactly one open invoice whose normalized currency and remaining amount equal the positive payment amount. `merchantReference` is audit data only.
 
-## Explicit v1 boundary
+Successful `AUTHORISATION` and report-backfilled `SentForSettle` rows use the same payment path. Failed authorisations are ignored. Capture failures, refunds, chargebacks, second chargebacks, and settlement reversals set `Reversal Required`; no automatic reversing entry is created. Conflicting retransmissions are quarantined as `Data Conflict` without overwriting retained authoritative data.
 
-The extension posts gross customer payments to an Adyen clearing G/L account. Settlement Details Report processing, bank payout matching, fee posting, exchange differences, automatic refunds, chargebacks, and automatic reversals are not implemented.
+## Security
+
+- The Power Automate identity receives `ADYEN SERVICE`, which can read setup/merchant allowlists and insert raw requests through the API but cannot normalize, reconcile, or post.
+- The Job Queue identity receives `ADYEN PROCESSOR` plus the tenant's standard permissions required to post customer payments.
+- Finance users receive `ADYEN FINANCE`; administrators receive `ADYEN ADMIN` and assign processor/finance rights only where needed.
+- Report URLs must use HTTPS, omit custom ports, and match the configured host or its subdomain. BC's normal outbound certificate validation remains enabled. File size is checked before persistence.
+- The extension never initiates report HTTP requests from a page action; downloads occur through the background report worker.
+
+## Deliberate exclusions
+
+Settlement-detail accounting, fees, payout/bank matching, exchange differences, automatic refund/chargeback/reversal posting, and sales-order release are outside this version.

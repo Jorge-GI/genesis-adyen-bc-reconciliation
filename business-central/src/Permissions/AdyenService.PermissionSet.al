@@ -1,14 +1,12 @@
-permissionset 72040 "ADYEN SERVICE"
+permissionset 72060 "ADYEN SERVICE"
 {
     Assignable = true;
-    Caption = 'Adyen API service';
+    Caption = 'Adyen webhook submitter';
 
     Permissions =
-        tabledata "Adyen Setup" = R,
-        tabledata "Adyen Inbox Entry" = RIM,
-        tabledata "Adyen Report Run" = RIM,
-        table "Adyen Inbox Entry" = X,
-        table "Adyen Report Run" = X,
-        page "Adyen Inbound Messages API" = X,
-        page "Adyen Report Runs API" = X;
+        table "Adyen Webhook Request" = X,
+        codeunit "Adyen Credentials" = X,
+        codeunit "Adyen Cryptography" = X,
+        codeunit "Adyen Webhook Intake" = X,
+        page "Adyen Webhook Requests API" = X;
 }

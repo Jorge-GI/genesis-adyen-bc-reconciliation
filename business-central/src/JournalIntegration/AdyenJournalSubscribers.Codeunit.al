@@ -1,4 +1,4 @@
-codeunit 72037 "Adyen Journal Subscribers"
+codeunit 72039 "Adyen Journal Subscribers"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"Gen. Jnl.-Post Line", 'OnAfterCustLedgEntryInsert', '', false, false)]
     local procedure OnAfterCustLedgEntryInsert(var CustLedgerEntry: Record "Cust. Ledger Entry"; GenJournalLine: Record "Gen. Journal Line"; DtldLedgEntryInserted: Boolean; PreviewMode: Boolean)
@@ -9,7 +9,6 @@ codeunit 72037 "Adyen Journal Subscribers"
             exit;
         if CustLedgerEntry."Document Type" <> CustLedgerEntry."Document Type"::Payment then
             exit;
-
         Payment.SetRange(SystemId, GenJournalLine."Adyen Payment ID");
         if not Payment.FindFirst() then
             exit;

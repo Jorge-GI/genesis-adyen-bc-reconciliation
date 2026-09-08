@@ -1,34 +1,38 @@
-# Adyen Event-to-Invoice Reconciliation
+# Adyen Reconciliation for Business Central 28
 
-Greenfield monorepo for importing Adyen merchant payment events into Business Central Online, applying eligible customer payments to invoices, and confirming completeness with the daily Payment Accounting Report.
+Greenfield AL extension for Business Central Online 28 that validates and stores Adyen Standard webhooks, reconciles Payment Accounting Reports, matches customer invoices, and optionally posts and applies payments. Power Automate is only the public webhook relay. All validation, state, report processing, matching, and accounting run inside Business Central.
 
-## Runtime components
+No Azure Functions, Service Bus, external storage, Key Vault, .NET service, or other Azure runtime component is used.
 
-- `azure/src/AdyenBridge.Ingress`: public Azure Function App. App Service Authentication validates Adyen's OAuth token; the function verifies HMAC and merchant/environment, then enqueues the raw notification before returning `202`.
-- `azure/src/AdyenBridge.Worker`: private Azure Function App. It archives webhook payloads, normalizes payment events, downloads and parses reports, and calls the versioned Business Central API.
-- `business-central`: AL extension. Its APIs only persist inbox/report records; a recurring Job Queue processes them and owns all matching, posting, and application logic.
-- `contracts`: JSON schemas and examples that define the boundary between Azure and Business Central.
-- `infra`: Bicep deployment for the two Function Apps, Service Bus queues, Blob Storage, identities, and monitoring.
+## Runtime flow
 
-The main happy path is:
+`Adyen -> Power Automate -> BC custom API -> raw webhook inbox -> Job Queue -> normalized events -> payments/reports -> match -> optional post/apply`
 
-`AUTHORISATION success=true` -> ingress -> Service Bus -> worker -> BC inbox -> Job Queue -> exact invoice match -> posted/applied payment -> `SentForSettle` report confirmation.
+- Power Automate forwards the complete webhook envelope to the create-only API and returns `[accepted]` only after BC accepts it.
+- BC checks the payload size, JSON envelope, test/live environment, merchant, and every item HMAC synchronously, then stores the raw request without doing accounting.
+- A recurring Job Queue processes one transactional unit at a time. Failed units roll back and remain retryable.
+- Successful `AUTHORISATION` events create merchant-qualified payments. Adverse lifecycle events require finance review and never reverse entries automatically.
+- `REPORT_AVAILABLE` events create merchant-qualified report runs. BC downloads and parses the CSV in the background, confirms existing payments, and backfills missing ones through the same matching path.
+- Auto Post is off by default and is enabled separately for each merchant only after validation.
 
-Business Central object allocation: `72000–72149` for the production app and `72150–72200` for the test app.
+Production AL objects use `72000–72149`; AL test objects use `72150–72200`. The app keeps its original app ID and targets platform/application `28.0.0.0` with runtime `16.0`.
 
-See the [architecture](docs/architecture.md), [installation and configuration guide](docs/setup.md),
-[testing and validation guide](docs/testing-validation.md), and [operations guide](docs/operations.md).
+## Repository
+
+- `business-central`: production AL app.
+- `business-central-tests`: AL test app and report-download mock subscriber.
+- `contracts`: Power Automate API schema and Adyen webhook/report fixtures.
+- `docs`: architecture, setup, operations, Power Automate, and validation guidance.
+
+Start with [setup](docs/setup.md), then build the [Power Automate flow](docs/power-automate.md). Operational recovery is in [operations](docs/operations.md), and coverage/UAT is in [testing and validation](docs/testing-validation.md).
 
 ## Build
 
-Azure requires the .NET 8 SDK:
+Download matching BC 28 symbols into `business-central/.alpackages`, then compile the production app and place that generated package in the symbol cache before compiling the tests:
 
 ```powershell
-dotnet restore azure/AdyenBridge.sln
-dotnet build azure/AdyenBridge.sln --no-restore
-dotnet test azure/AdyenBridge.sln --no-build
+& $alc /project:'business-central' /packagecachepath:'business-central\.alpackages' /out:'business-central\.alpackages\Genesis Import GmbH_Adyen Reconciliation_1.0.0.0.app'
+& $alc /project:'business-central-tests' /packagecachepath:'business-central\.alpackages' /out:'business-central-tests\Adyen-Reconciliation-Tests.app'
 ```
 
-The AL project targets Business Central 28.0/runtime 16.0. Download matching symbols into `business-central/.alpackages` and compile with the AL Language extension or `alc.exe`.
-
-Do not commit `local.settings.json`, credentials, report files, webhook payloads, or generated `.app` packages.
+Generated `.app` packages, symbols, webhook payloads, report files, credentials, and `business-central/.vscode/rad.json` must not be committed.

@@ -1,26 +1,28 @@
-page 72014 "Adyen Payment Exceptions"
+page 72015 "Adyen Payment Exceptions"
 {
     PageType = List;
     Caption = 'Adyen Payment Exceptions';
     SourceTable = "Imported Adyen Payment";
-    SourceTableView = where(Status = filter(Imported | Error | ReversalRequired));
+    SourceTableView = where(Status = filter(Imported | Error | ReversalRequired | DataConflict));
     UsageCategory = Lists;
     ApplicationArea = All;
+
     layout
     {
         area(Content)
         {
             repeater(Exceptions)
             {
-                field("PSP Reference"; Rec."PSP Reference") { ApplicationArea = All; Editable = false; }
-                field("Shopper Reference"; Rec."Shopper Reference") { ApplicationArea = All; Editable = false; }
+                field("Merchant Account"; Rec."Merchant Account") { ApplicationArea = All; }
+                field("PSP Reference"; Rec."PSP Reference") { ApplicationArea = All; }
+                field("Shopper Reference"; Rec."Shopper Reference") { ApplicationArea = All; }
                 field("Resolved Customer No."; Rec."Resolved Customer No.") { ApplicationArea = All; }
-                field(Amount; Rec.Amount) { ApplicationArea = All; Editable = false; }
-                field("Currency Code"; Rec."Currency Code") { ApplicationArea = All; Editable = false; }
-                field(Status; Rec.Status) { ApplicationArea = All; Editable = false; }
-                field("Match Result"; Rec."Match Result") { ApplicationArea = All; Editable = false; }
-                field("Report Status"; Rec."Report Status") { ApplicationArea = All; Editable = false; }
-                field("Exception Message"; Rec."Exception Message") { ApplicationArea = All; Editable = false; }
+                field(Amount; Rec.Amount) { ApplicationArea = All; }
+                field("Currency Code"; Rec."Currency Code") { ApplicationArea = All; }
+                field(Status; Rec.Status) { ApplicationArea = All; }
+                field("Match Result"; Rec."Match Result") { ApplicationArea = All; }
+                field("Report Status"; Rec."Report Status") { ApplicationArea = All; }
+                field("Exception Message"; Rec."Exception Message") { ApplicationArea = All; }
             }
         }
     }
@@ -39,7 +41,7 @@ page 72014 "Adyen Payment Exceptions"
                 trigger OnAction()
                 var
                     GenJournalLine: Record "Gen. Journal Line";
-                    ManualJournal: Codeunit "Adyen Manual Journal Mgt.";
+                    ManualJournal: Codeunit "Adyen Manual Journal";
                 begin
                     ManualJournal.CreateDraft(Rec, GenJournalLine);
                     Page.Run(Page::"Payment Journal", GenJournalLine);

@@ -1,0 +1,25 @@
+{
+  "live": "false",
+  "notificationItems": [
+    {
+      "NotificationRequestItem": {
+        "additionalData": {
+          "hmacSignature": "LkSKgyRPvceAQl8+bWrDIVTejATF56CjvObTPC9CNDw=",
+          "shopperReference": "CUST-10000"
+        },
+        "amount": {
+          "currency": "EUR",
+          "value": 12345
+        },
+        "eventCode": "AUTHORISATION",
+        "eventDate": "2026-09-03T10:00:00Z",
+        "merchantAccountCode": "GenesisMerchant",
+        "merchantReference": "ORDER:1\\A",
+        "paymentMethod": "scheme",
+        "pspReference": "8831234567890123",
+        "reason": "Authorised",
+        "success": "true"
+      }
+    }
+  ]
+}

@@ -9,4 +9,5 @@ enum 72003 "Adyen Payment Status"
     value(4; ManuallyReconciled) { Caption = 'Manually reconciled'; }
     value(5; ReversalRequired) { Caption = 'Reversal required'; }
     value(6; Error) { Caption = 'Error'; }
+    value(7; DataConflict) { Caption = 'Data conflict'; }
 }

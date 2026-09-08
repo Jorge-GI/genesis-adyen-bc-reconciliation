@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://genesis-import.example/contracts/adyen-webhook-request-v1.schema.json",
+  "title": "Business Central Adyen webhook request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["receivedAtUtc", "contentType", "payload"],
+  "properties": {
+    "receivedAtUtc": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "contentType": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "flowRunId": {
+      "type": "string",
+      "maxLength": 250
+    },
+    "payload": {
+      "type": "string",
+      "contentEncoding": "base64",
+      "description": "Base64-encoded complete Adyen Standard webhook JSON envelope."
+    }
+  }
+}

@@ -1,4 +1,4 @@
-page 72015 "Adyen Payment Method Policies"
+page 72017 "Adyen Payment Method Policies"
 {
     PageType = List;
     Caption = 'Adyen Payment Method Policies';
