@@ -1,8 +1,8 @@
-page 72015 "Adyen Payment Method Policies"
+page 72017 "Adyen Payment Method Policies"
 {
     PageType = List;
     Caption = 'Adyen Payment Method Policies';
-    SourceTable = "Adyen Payment Method Policy";
+    SourceTable = "Adyen Merchant Method Policy";
     UsageCategory = Administration;
     ApplicationArea = All;
 
@@ -12,6 +12,7 @@ page 72015 "Adyen Payment Method Policies"
         {
             repeater(Policies)
             {
+                field("Merchant Account"; Rec."Merchant Account") { ApplicationArea = All; }
                 field("Payment Method"; Rec."Payment Method") { ApplicationArea = All; }
                 field(Description; Rec.Description) { ApplicationArea = All; }
                 field("Enabled for Auto Post"; Rec."Enabled for Auto Post") { ApplicationArea = All; }

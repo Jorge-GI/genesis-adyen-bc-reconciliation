@@ -1,26 +1,40 @@
-permissionset 72041 "ADYEN FINANCE"
+permissionset 72062 "ADYEN FINANCE"
 {
     Assignable = true;
     Caption = 'Adyen finance operator';
 
     Permissions =
         tabledata "Adyen Setup" = R,
-        tabledata "Adyen Inbox Entry" = RM,
-        tabledata "Adyen Report Run" = R,
-        tabledata "Imported Adyen Payment" = RIM,
-        tabledata "Adyen Payment Method Policy" = R,
+        tabledata "Adyen Merchant" = R,
+        tabledata "Adyen Webhook Request" = RM,
+        tabledata "Adyen Event Entry" = RM,
+        tabledata "Adyen Report Run" = RM,
+        tabledata "Imported Adyen Payment" = RM,
+        tabledata "Adyen Merchant Method Policy" = R,
+        tabledata "Adyen Role Center Cue" = RI,
         tabledata "Gen. Journal Line" = RIMD,
         tabledata "Cust. Ledger Entry" = R,
+        tabledata "Detailed Cust. Ledg. Entry" = R,
         tabledata Customer = R,
+        tabledata Currency = R,
         tabledata "General Ledger Setup" = R,
-        codeunit "Adyen Inbox Dispatcher" = X,
+        tabledata "Gen. Journal Template" = R,
+        tabledata "Gen. Journal Batch" = R,
+        tabledata "G/L Account" = R,
         codeunit "Adyen Invoice Matcher" = X,
         codeunit "Adyen Payment Poster" = X,
-        codeunit "Adyen Payment State Mgt." = X,
-        codeunit "Adyen Report Reconciler" = X,
-        codeunit "Adyen Manual Journal Mgt." = X,
+        codeunit "Adyen Manual Journal" = X,
+        codeunit "Adyen Event Disposition" = X,
+        codeunit "Gen. Jnl.-Post Line" = X,
+        page "Adyen Webhook Requests" = X,
+        page "Adyen Event Entries" = X,
+        page "Adyen Payment Lifecycle Events" = X,
         page "Imported Adyen Payments" = X,
         page "Adyen Payment Exceptions" = X,
-        page "Adyen Inbox Entries" = X,
-        page "Adyen Report Runs" = X;
+        page "Adyen Report Runs" = X,
+        page "Posted Adyen Payments" = X,
+        page "Adyen Activities" = X,
+        page "Adyen Job Queue Activities" = X,
+        page "Adyen Role Center Actions" = X,
+        page "Adyen Reconciliation RC" = X;
 }

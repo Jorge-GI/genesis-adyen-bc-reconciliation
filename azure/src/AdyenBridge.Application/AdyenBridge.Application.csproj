@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\AdyenBridge.Contracts\AdyenBridge.Contracts.csproj" />
-    <PackageReference Include="CsvHelper" />
-  </ItemGroup>
-</Project>
-

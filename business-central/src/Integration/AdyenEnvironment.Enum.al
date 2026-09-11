@@ -1,4 +1,4 @@
-enum 72001 "Adyen Environment"
+enum 72000 "Adyen Environment"
 {
     Extensible = false;
 

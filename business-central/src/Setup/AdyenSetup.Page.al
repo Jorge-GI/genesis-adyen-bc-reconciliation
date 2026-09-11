@@ -16,27 +16,26 @@ page 72010 "Adyen Setup"
             {
                 Caption = 'General';
                 field(Enabled; Rec.Enabled) { ApplicationArea = All; }
-                field("Merchant Account"; Rec."Merchant Account") { ApplicationArea = All; }
                 field(Environment; Rec.Environment) { ApplicationArea = All; }
-                field("Auto Post"; Rec."Auto Post") { ApplicationArea = All; }
+                field("Max Messages Per Run"; Rec."Max Messages Per Run") { ApplicationArea = All; }
             }
-            group(Posting)
+            group(Security)
             {
-                Caption = 'Posting';
-                field("Journal Template Name"; Rec."Journal Template Name") { ApplicationArea = All; }
-                field("Journal Batch Name"; Rec."Journal Batch Name") { ApplicationArea = All; }
-                field("Manual Journal Batch Name"; Rec."Manual Journal Batch Name") { ApplicationArea = All; }
-                field("Clearing G/L Account No."; Rec."Clearing G/L Account No.") { ApplicationArea = All; }
+                Caption = 'Security and Report Access';
+                field("HMAC Key Configured"; Rec."HMAC Key Configured") { ApplicationArea = All; }
+                field("Previous HMAC Configured"; Rec."Previous HMAC Configured") { ApplicationArea = All; }
+                field("Report Credentials Configured"; Rec."Report Credentials Configured") { ApplicationArea = All; }
+                field("Allowed Report Hosts"; Rec."Allowed Report Hosts") { ApplicationArea = All; }
+                field("Max Webhook Payload Bytes"; Rec."Max Webhook Payload Bytes") { ApplicationArea = All; }
+                field("Max Report File Bytes"; Rec."Max Report File Bytes") { ApplicationArea = All; }
             }
-            group(Reports)
+            group(Operations)
             {
-                Caption = 'Reports';
+                Caption = 'Operations';
                 field("Report Deadline"; Rec."Report Deadline") { ApplicationArea = All; }
-                field("Last Ready Report Date"; Rec."Last Ready Report Date") { ApplicationArea = All; }
                 field("Raw Retention Days"; Rec."Raw Retention Days") { ApplicationArea = All; }
                 field("Report Retention Months"; Rec."Report Retention Months") { ApplicationArea = All; }
-                field("Report Overdue"; Rec."Report Overdue") { ApplicationArea = All; }
-                field("Report Alert Message"; Rec."Report Alert Message") { ApplicationArea = All; }
+                field("Last Cleanup At UTC"; Rec."Last Cleanup At UTC") { ApplicationArea = All; }
             }
         }
     }
@@ -45,17 +44,153 @@ page 72010 "Adyen Setup"
     {
         area(Processing)
         {
+            action(SetCurrentHmac)
+            {
+                Caption = 'Set Current HMAC Key';
+                ApplicationArea = All;
+                Image = EncryptionKeys;
+                ToolTip = 'Store the current Adyen webhook HMAC key securely. The key must be a 64-character hexadecimal value and cannot be read back.';
+
+                trigger OnAction()
+                var
+                    SecretInput: Page "Adyen Secret Input";
+                    Credentials: Codeunit "Adyen Credentials";
+                begin
+                    if SecretInput.RunModal() <> Action::OK then
+                        exit;
+                    Credentials.SetCurrentHmacHex(SecretInput.GetValue());
+                    CurrPage.Update(false);
+                end;
+            }
+            action(RotateHmac)
+            {
+                Caption = 'Rotate HMAC Key';
+                ApplicationArea = All;
+                Image = Change;
+                ToolTip = 'Replace the current HMAC key and retain it as the previous key so webhook deliveries signed during the rotation window can still be accepted.';
+
+                trigger OnAction()
+                var
+                    SecretInput: Page "Adyen Secret Input";
+                    Credentials: Codeunit "Adyen Credentials";
+                begin
+                    if SecretInput.RunModal() <> Action::OK then
+                        exit;
+                    Credentials.RotateCurrentHmacHex(SecretInput.GetValue());
+                    CurrPage.Update(false);
+                end;
+            }
+            action(SetReportCredentials)
+            {
+                Caption = 'Set Report Credentials';
+                ApplicationArea = All;
+                Image = EncryptionKeys;
+                ToolTip = 'Store the Adyen report username and password securely for background report downloads. Stored values cannot be read back.';
+
+                trigger OnAction()
+                var
+                    CredentialDialog: Page "Adyen Report Credentials";
+                    Credentials: Codeunit "Adyen Credentials";
+                begin
+                    if CredentialDialog.RunModal() <> Action::OK then
+                        exit;
+                    Credentials.SetReportCredentials(CredentialDialog.GetUserName(), CredentialDialog.GetPassword());
+                    CurrPage.Update(false);
+                end;
+            }
+            action(TestCredentials)
+            {
+                Caption = 'Test Stored Credentials';
+                ApplicationArea = All;
+                Image = TestDatabase;
+                ToolTip = 'Verify that the encrypted report credentials are present and readable. This does not test a remote Adyen login.';
+
+                trigger OnAction()
+                var
+                    Credentials: Codeunit "Adyen Credentials";
+                begin
+                    Credentials.TestConfiguration();
+                    Message('The encrypted credentials are present and readable. Use a report retry to validate the remote Adyen login.');
+                end;
+            }
+            action(ClearPreviousHmac)
+            {
+                Caption = 'Clear Previous HMAC Key';
+                ApplicationArea = All;
+                Image = Delete;
+                ToolTip = 'Remove the previous HMAC key after Adyen can no longer send webhook deliveries signed with it.';
+
+                trigger OnAction()
+                var
+                    Credentials: Codeunit "Adyen Credentials";
+                begin
+                    if Confirm('Clear the previous HMAC key?') then begin
+                        Credentials.ClearPreviousHmac();
+                        CurrPage.Update(false);
+                    end;
+                end;
+            }
+            action(ClearCurrentHmac)
+            {
+                Caption = 'Clear Current HMAC Key';
+                ApplicationArea = All;
+                Image = Delete;
+                ToolTip = 'Remove the current HMAC key. New webhook submissions will be rejected until another current key is stored.';
+
+                trigger OnAction()
+                var
+                    Credentials: Codeunit "Adyen Credentials";
+                begin
+                    if Confirm('Clear the current HMAC key? New webhook requests will be rejected until another key is set.') then begin
+                        Credentials.ClearCurrentHmac();
+                        CurrPage.Update(false);
+                    end;
+                end;
+            }
+            action(ClearReportCredentials)
+            {
+                Caption = 'Clear Report Credentials';
+                ApplicationArea = All;
+                Image = Delete;
+                ToolTip = 'Remove the stored Adyen report username and password. Report downloads will fail until new credentials are stored.';
+
+                trigger OnAction()
+                var
+                    Credentials: Codeunit "Adyen Credentials";
+                begin
+                    if Confirm('Clear the Adyen report credentials?') then begin
+                        Credentials.ClearReportCredentials();
+                        CurrPage.Update(false);
+                    end;
+                end;
+            }
             action(CreateJobQueueEntry)
             {
                 Caption = 'Create Job Queue Entry';
                 ApplicationArea = All;
                 Image = Job;
+                ToolTip = 'Create or update the recurring background Job Queue entry that processes Adyen webhook requests, reports, events, deadlines, and retention.';
 
                 trigger OnAction()
                 var
                     JobQueueSetup: Codeunit "Adyen Job Queue Setup";
                 begin
                     JobQueueSetup.EnsureEntry();
+                end;
+            }
+            action(RunRetention)
+            {
+                Caption = 'Run Retention Cleanup';
+                ApplicationArea = All;
+                Image = DeleteExpiredComponents;
+                ToolTip = 'Remove eligible retained webhook and report BLOB content now according to the configured retention periods. Audit metadata is preserved.';
+
+                trigger OnAction()
+                var
+                    Retention: Codeunit "Adyen Retention";
+                begin
+                    Retention.RunCleanup();
+                    CurrPage.Update(false);
                 end;
             }
         }

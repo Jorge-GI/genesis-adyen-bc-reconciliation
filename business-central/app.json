@@ -2,9 +2,9 @@
   "id": "8d42ce86-f04f-4c45-bec4-315451f469d4",
   "name": "Adyen Reconciliation",
   "publisher": "Genesis Import GmbH",
-  "version": "1.0.0.0",
-  "brief": "Imports Adyen payment events and reconciles them with customer invoices.",
-  "description": "Webhook and accounting-report inbox, payment matching, posting, manual exceptions, and report confirmation for Adyen merchant payments.",
+  "version": "1.0.0.13",
+  "brief": "Processes Adyen webhooks and accounting reports entirely in Business Central.",
+  "description": "Power Automate webhook intake, HMAC validation, report download, payment matching, posting, manual exceptions, and report backfill for Adyen merchant payments.",
   "privacyStatement": "",
   "EULA": "",
   "help": "",
@@ -24,6 +24,13 @@
   "features": [
     "NoImplicitWith",
     "TranslationFile"
+  ],
+  "internalsVisibleTo": [
+    {
+      "id": "9f728abe-b946-41a8-a1c4-f24c3b37a669",
+      "name": "Adyen Reconciliation Tests",
+      "publisher": "Genesis Import GmbH"
+    }
   ],
   "resourceExposurePolicy": {
     "allowDebugging": false,
