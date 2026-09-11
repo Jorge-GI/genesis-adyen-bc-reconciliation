@@ -7,6 +7,5 @@
 **/TestResults/
 .vs/
 .tools/
-.vscode/.alcache/
-**/.vscode/rad.json
+**/.vscode/
 infra/*.bicepparam
