@@ -18,17 +18,6 @@ codeunit 72031 "Adyen Credentials"
     end;
 
     [NonDebuggable]
-    procedure SetPreviousHmacHex(HexKey: Text)
-    var
-        Crypto: Codeunit "Adyen Cryptography";
-        EncodedKey: SecretText;
-    begin
-        EncodedKey := Crypto.HexToBase64(HexKey);
-        IsolatedStorage.SetEncrypted(PreviousHmacKeyLbl, EncodedKey, DataScope::Company);
-        UpdateFlags();
-    end;
-
-    [NonDebuggable]
     procedure RotateCurrentHmacHex(NewHexKey: Text)
     var
         CurrentKey: SecretText;

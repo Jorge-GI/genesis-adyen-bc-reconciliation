@@ -6,6 +6,9 @@ codeunit 72044 "Adyen Dispatcher"
     var
         Setup: Record "Adyen Setup";
     begin
+        if GuiAllowed() then
+            Error('The Adyen dispatcher must run as a scheduled background job. Set the Job Queue Entry to Ready instead of using Run once (Foreground).');
+
         Setup.GetRecordOnce();
         if not Setup.Enabled then
             exit;
@@ -66,17 +69,52 @@ codeunit 72044 "Adyen Dispatcher"
         EntryNo: BigInteger;
     begin
         ReportRun.SetCurrentKey(Status, "Requested At UTC");
+        ReportRun.SetRange(Status, ReportRun.Status::Loading);
+        if ReportRun.FindFirst() then begin
+            ProcessReport(ReportRun."Entry No.");
+            exit;
+        end;
+
+        ReportRun.Reset();
+        ReportRun.SetCurrentKey(Status, "Requested At UTC");
         ReportRun.SetRange(Status, ReportRun.Status::Requested);
         if not ReportRun.FindFirst() then
             exit;
         EntryNo := ReportRun."Entry No.";
 
+        ProcessReport(EntryNo);
+    end;
+
+    internal procedure ProcessReport(EntryNo: BigInteger)
+    var
+        ReportRun: Record "Adyen Report Run";
+    begin
+        ReportRun.Get(EntryNo);
+        if not (ReportRun.Status in [ReportRun.Status::Requested, ReportRun.Status::Loading]) then
+            Error('Report run %1 cannot be processed from status %2.', EntryNo, ReportRun.Status);
+
+        if not RunReportPhase(EntryNo) then
+            exit;
+
+        ReportRun.Get(EntryNo);
+        if ReportRun.Status = ReportRun.Status::Loading then
+            RunReportPhase(EntryNo);
+    end;
+
+    local procedure RunReportPhase(EntryNo: BigInteger): Boolean
+    var
+        ReportRun: Record "Adyen Report Run";
+    begin
         Commit();
         ClearLastError();
         ReportRun.Get(EntryNo);
-        if not Codeunit.Run(Codeunit::"Adyen Report Worker", ReportRun) then
+        if not Codeunit.Run(Codeunit::"Adyen Report Worker", ReportRun) then begin
             MarkReportError(EntryNo, GetLastErrorText());
+            Commit();
+            exit(false);
+        end;
         Commit();
+        exit(true);
     end;
 
     local procedure MarkReportError(EntryNo: BigInteger; ErrorText: Text)
@@ -138,6 +176,7 @@ codeunit 72044 "Adyen Dispatcher"
     begin
         EventEntry.Get(TransportId);
         EventEntry.Status := EventEntry.Status::Error;
+        EventEntry."Disposition Reason" := '';
         EventEntry."Retry Count" += 1;
         EventEntry."Last Error" := CopyStr(ErrorText, 1, MaxStrLen(EventEntry."Last Error"));
         EventEntry.Modify(true);

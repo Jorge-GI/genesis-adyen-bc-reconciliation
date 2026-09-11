@@ -28,9 +28,11 @@ page 72020 "Adyen Webhook Requests API"
                 field(receivedAtUtc; Rec."Received At UTC") { Caption = 'Received At UTC'; }
                 field(contentType; Rec."Content Type") { Caption = 'Content Type'; }
                 field(flowRunId; Rec."Flow Run ID") { Caption = 'Flow Run ID'; }
-                field(payload; Rec.Payload) { Caption = 'Payload'; }
-                field(payloadHash; Rec."Payload Hash") { Caption = 'Payload Hash'; Editable = false; }
-                field(status; Rec.Status) { Caption = 'Status'; Editable = false; }
+                field(payload; PayloadText)
+                {
+                    Caption = 'Payload';
+                    ToolTip = 'Specifies the complete Adyen webhook envelope as JSON text.';
+                }
             }
         }
     }
@@ -39,24 +41,20 @@ page 72020 "Adyen Webhook Requests API"
     var
         StoredRequest: Record "Adyen Webhook Request";
         Intake: Codeunit "Adyen Webhook Intake";
-        PayloadInStream: InStream;
-        PayloadOutStream: OutStream;
     begin
         StoredRequest.Init();
         StoredRequest."Received At UTC" := Rec."Received At UTC";
         StoredRequest."Content Type" := Rec."Content Type";
         StoredRequest."Flow Run ID" := Rec."Flow Run ID";
-        Rec.CalcFields(Payload);
-        Rec.Payload.CreateInStream(PayloadInStream);
-        StoredRequest.Payload.CreateOutStream(PayloadOutStream);
-        CopyStream(PayloadOutStream, PayloadInStream);
-        Intake.Accept(StoredRequest);
+        Intake.AcceptText(StoredRequest, PayloadText);
 
         Rec."Entry No." := StoredRequest."Entry No.";
         Rec.SystemId := StoredRequest.SystemId;
         Rec."Received At UTC" := StoredRequest."Received At UTC";
-        Rec."Payload Hash" := StoredRequest."Payload Hash";
-        Rec.Status := StoredRequest.Status;
+        Clear(PayloadText);
         exit(false);
     end;
+
+    var
+        PayloadText: Text;
 }

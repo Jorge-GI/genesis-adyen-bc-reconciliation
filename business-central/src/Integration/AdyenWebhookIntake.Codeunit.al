@@ -5,6 +5,19 @@ codeunit 72034 "Adyen Webhook Intake"
         tabledata "Adyen Merchant" = R,
         tabledata "Adyen Webhook Request" = RI;
 
+    procedure AcceptText(var WebhookRequest: Record "Adyen Webhook Request"; PayloadText: Text): Boolean
+    var
+        PayloadOutStream: OutStream;
+    begin
+        if PayloadText = '' then
+            Error('The webhook payload is required.');
+
+        WebhookRequest.Payload.CreateOutStream(PayloadOutStream, TextEncoding::UTF8);
+        PayloadOutStream.WriteText(PayloadText);
+        Clear(PayloadOutStream);
+        exit(Accept(WebhookRequest));
+    end;
+
     procedure Accept(var WebhookRequest: Record "Adyen Webhook Request"): Boolean
     var
         ExistingRequest: Record "Adyen Webhook Request";
@@ -57,7 +70,6 @@ codeunit 72034 "Adyen Webhook Intake"
         Item: JsonObject;
         PayloadText: Text;
         ItemIndex: Integer;
-        InsertedCount: Integer;
     begin
         PayloadText := ReadPayload(WebhookRequest, 0);
         PayloadJson.ReadFrom(PayloadText);
@@ -66,8 +78,7 @@ codeunit 72034 "Adyen Webhook Intake"
         for ItemIndex := 0 to NotificationItems.Count() - 1 do begin
             Item := GetNotificationItem(NotificationItems, ItemIndex);
             BuildEvent(EventEntry, WebhookRequest, Item, ItemIndex);
-            if InsertEventIdempotently(EventEntry) then
-                InsertedCount += 1;
+            InsertEventIdempotently(EventEntry);
         end;
 
         WebhookRequest."Normalized Item Count" := NotificationItems.Count();
@@ -77,19 +88,12 @@ codeunit 72034 "Adyen Webhook Intake"
         WebhookRequest.Modify(true);
     end;
 
-    procedure GeneratePayloadHash(PayloadText: Text): Code[64]
-    var
-        Crypto: Codeunit "Adyen Cryptography";
-    begin
-        exit(Crypto.GenerateSha256(PayloadText));
-    end;
-
     local procedure GeneratePayloadBlobHash(var WebhookRequest: Record "Adyen Webhook Request"): Code[64]
     var
         Crypto: Codeunit "Adyen Cryptography";
         PayloadInStream: InStream;
     begin
-        WebhookRequest.CalcFields(Payload);
+        LoadPersistedPayload(WebhookRequest);
         WebhookRequest.Payload.CreateInStream(PayloadInStream);
         exit(Crypto.GenerateStreamHash(PayloadInStream));
     end;
@@ -161,6 +165,10 @@ codeunit 72034 "Adyen Webhook Intake"
         if UpperCase(DelChr(EventEntry."Message Type", '=', '_- ')) = 'REPORTAVAILABLE' then
             EventEntry."External Report ID" := CopyStr(GetText(Item, 'pspReference'), 1, MaxStrLen(EventEntry."External Report ID"));
         EventEntry."Original PSP Reference" := CopyStr(GetOptionalText(Item, 'originalReference'), 1, MaxStrLen(EventEntry."Original PSP Reference"));
+        if EventEntry."Original PSP Reference" <> '' then
+            EventEntry."Payment PSP Reference" := CopyStr(EventEntry."Original PSP Reference", 1, MaxStrLen(EventEntry."Payment PSP Reference"))
+        else
+            EventEntry."Payment PSP Reference" := CopyStr(EventEntry."PSP Reference", 1, MaxStrLen(EventEntry."Payment PSP Reference"));
         EventEntry."Merchant Reference" := CopyStr(GetOptionalText(Item, 'merchantReference'), 1, MaxStrLen(EventEntry."Merchant Reference"));
         EventEntry."Shopper Reference" := CopyStr(GetAdditionalDataValue(Item, 'shopperReference'), 1, MaxStrLen(EventEntry."Shopper Reference"));
         EventEntry."Payment Method" := CopyStr(GetOptionalText(Item, 'paymentMethod'), 1, MaxStrLen(EventEntry."Payment Method"));
@@ -185,17 +193,15 @@ codeunit 72034 "Adyen Webhook Intake"
                 Format(EventEntry.Amount, 0, 9)));
     end;
 
-    local procedure InsertEventIdempotently(var EventEntry: Record "Adyen Event Entry"): Boolean
+    local procedure InsertEventIdempotently(var EventEntry: Record "Adyen Event Entry")
     var
         ExistingEvent: Record "Adyen Event Entry";
     begin
-        if not ExistingEvent.Get(EventEntry."Transport ID") then begin
-            EventEntry.Insert(true);
-            exit(true);
-        end;
-        if ExistingEvent."Payload Hash" <> EventEntry."Payload Hash" then
-            Error('Transport ID %1 already exists with a different payload hash.', EventEntry."Transport ID");
-        exit(false);
+        if not ExistingEvent.Get(EventEntry."Transport ID") then
+            EventEntry.Insert(true)
+        else
+            if ExistingEvent."Payload Hash" <> EventEntry."Payload Hash" then
+                Error('Transport ID %1 already exists with a different payload hash.', EventEntry."Transport ID");
     end;
 
     local procedure ReadPayload(var WebhookRequest: Record "Adyen Webhook Request"; MaximumBytes: Integer): Text
@@ -204,7 +210,7 @@ codeunit 72034 "Adyen Webhook Intake"
         PayloadText: Text;
         PayloadLine: Text;
     begin
-        WebhookRequest.CalcFields(Payload);
+        LoadPersistedPayload(WebhookRequest);
         if not WebhookRequest.Payload.HasValue() then
             Error('The webhook payload is required.');
         if (MaximumBytes > 0) and (WebhookRequest.Payload.Length() > MaximumBytes) then
@@ -217,6 +223,12 @@ codeunit 72034 "Adyen Webhook Intake"
         if PayloadText = '' then
             Error('The webhook payload is empty.');
         exit(PayloadText);
+    end;
+
+    local procedure LoadPersistedPayload(var WebhookRequest: Record "Adyen Webhook Request")
+    begin
+        if WebhookRequest."Entry No." <> 0 then
+            WebhookRequest.CalcFields(Payload);
     end;
 
     local procedure GetNotificationItem(NotificationItems: JsonArray; ItemIndex: Integer): JsonObject

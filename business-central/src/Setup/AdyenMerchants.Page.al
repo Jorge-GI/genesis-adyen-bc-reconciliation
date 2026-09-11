@@ -29,4 +29,20 @@ page 72011 "Adyen Merchants"
             }
         }
     }
+
+    actions
+    {
+        area(Navigation)
+        {
+            action(PaymentMethodPolicies)
+            {
+                Caption = 'Payment Method Policies';
+                ApplicationArea = All;
+                Image = Payment;
+                RunObject = page "Adyen Payment Method Policies";
+                RunPageLink = "Merchant Account" = field("Merchant Account");
+                ToolTip = 'View or configure the payment methods that are eligible for automatic matching and posting for the selected merchant.';
+            }
+        }
+    }
 }

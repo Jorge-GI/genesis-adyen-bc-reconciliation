@@ -14,6 +14,7 @@ codeunit 72039 "Adyen Journal Subscribers"
             exit;
 
         Payment."Posted Payment Entry No." := CustLedgerEntry."Entry No.";
+        Payment."Posting Origin" := GenJournalLine."Adyen Posting Origin";
         if Payment.Status = Payment.Status::ManualJournalCreated then
             Payment.Status := Payment.Status::ManuallyReconciled;
         Payment."Exception Message" := '';

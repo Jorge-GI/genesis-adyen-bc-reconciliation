@@ -14,11 +14,13 @@ codeunit 72157 "Adyen Posting Tests"
         PaymentPoster: Codeunit "Adyen Payment Poster";
         InvoiceEntryNo: Integer;
         PaymentCount: Integer;
+        DispositionReason: Text[250];
+        LifecycleApplied: Boolean;
     begin
         ConfigurePostingEnvironment(false);
         InvoiceEntryNo := PostInvoice('INV-AUTO', 100);
         BuildAuthorisation(EventEntry, 'PSP-AUTO', 100);
-        PaymentState.ImportPositivePayment(EventEntry, false);
+        PaymentState.ImportPositivePaymentWithResult(EventEntry, false, DispositionReason, LifecycleApplied);
         Payment.Get(MerchantAccount(), 'PSP-AUTO');
         AssertTrue(Payment.Status = Payment.Status::ReadyToPost, 'Auto Post off must retain an exact match for review.');
         AssertEqualInteger(0, Payment."Posted Payment Entry No.", 'Auto Post off must create no payment ledger entry.');
@@ -26,17 +28,74 @@ codeunit 72157 "Adyen Posting Tests"
         Merchant.Get(MerchantAccount());
         Merchant."Auto Post" := true;
         Merchant.Modify(true);
-        PaymentPoster.PostAndApply(Payment);
+        PaymentPoster.PostAndApplyAutomatically(Payment);
         Payment.Get(MerchantAccount(), 'PSP-AUTO');
         AssertTrue(Payment.Status = Payment.Status::PostedApplied, 'The exact match must post and apply when authorized.');
         AssertTrue(Payment."Posted Payment Entry No." <> 0, 'The customer payment ledger entry must be linked.');
+        AssertTrue(Payment."Posting Origin" = Payment."Posting Origin"::Automatic, 'The automatic posting path must record the automatic origin.');
         CustLedgerEntry.Get(InvoiceEntryNo);
         CustLedgerEntry.CalcFields("Remaining Amount");
         AssertTrue(not CustLedgerEntry.Open and (CustLedgerEntry."Remaining Amount" = 0), 'The invoice must be fully applied.');
 
         PaymentCount := CountPaymentEntries('PSP-AUTO');
-        PaymentPoster.PostAndApply(Payment);
+        PaymentPoster.PostAndApplyAutomatically(Payment);
         AssertEqualInteger(PaymentCount, CountPaymentEntries('PSP-AUTO'), 'A linked payment must not post twice.');
+    end;
+
+    [Test]
+    procedure PaymentStateAutoPostRecordsAutomaticOrigin()
+    var
+        EventEntry: Record "Adyen Event Entry";
+        Payment: Record "Imported Adyen Payment";
+        PaymentState: Codeunit "Adyen Payment State";
+        DispositionReason: Text[250];
+        LifecycleApplied: Boolean;
+    begin
+        ConfigurePostingEnvironment(true);
+        PostInvoice('INV-STATE-AUTO', 100);
+        BuildAuthorisation(EventEntry, 'PSP-STATE-AUTO', 100);
+
+        PaymentState.ImportPositivePaymentWithResult(EventEntry, false, DispositionReason, LifecycleApplied);
+
+        Payment.Get(MerchantAccount(), 'PSP-STATE-AUTO');
+        AssertTrue(Payment.Status = Payment.Status::PostedApplied, 'The payment-state auto-post path must post an exact match.');
+        AssertTrue(Payment."Posted Payment Entry No." <> 0, 'The payment-state auto-post path must link the customer ledger entry.');
+        AssertTrue(Payment."Posting Origin" = Payment."Posting Origin"::Automatic, 'The payment-state auto-post path must record the automatic origin.');
+    end;
+
+    [Test]
+    procedure CancellationAfterPostingRequiresReviewWithoutLedgerMutation()
+    var
+        EventEntry: Record "Adyen Event Entry";
+        Payment: Record "Imported Adyen Payment";
+        PaymentState: Codeunit "Adyen Payment State";
+        PaymentPoster: Codeunit "Adyen Payment Poster";
+        PaymentCount: Integer;
+        PostedPaymentEntryNo: Integer;
+        DispositionReason: Text[250];
+        LifecycleApplied: Boolean;
+    begin
+        ConfigurePostingEnvironment(false);
+        PostInvoice('INV-CANCEL', 100);
+        BuildAuthorisation(EventEntry, 'PSP-CANCEL', 100);
+        PaymentState.ImportPositivePaymentWithResult(EventEntry, false, DispositionReason, LifecycleApplied);
+        Payment.Get(MerchantAccount(), 'PSP-CANCEL');
+        PaymentPoster.PostAndApplyAutomatically(Payment);
+        Payment.Get(MerchantAccount(), 'PSP-CANCEL');
+        PostedPaymentEntryNo := Payment."Posted Payment Entry No.";
+        PaymentCount := CountPaymentEntries('PSP-CANCEL');
+
+        BuildAuthorisation(EventEntry, 'MOD-CANCEL', 100);
+        EventEntry."Message Type" := 'CANCELLATION';
+        EventEntry."Original PSP Reference" := 'PSP-CANCEL';
+        EventEntry."Occurred At UTC" := CreateDateTime(WorkDate(), 110000T);
+        EventEntry."Logical Event Key" := 'LOGICAL-CANCEL-AFTER-POST';
+        PaymentState.ApplyAdverseEventWithResult(EventEntry, DispositionReason, LifecycleApplied);
+
+        Payment.Get(MerchantAccount(), 'PSP-CANCEL');
+        AssertTrue(Payment.Status = Payment.Status::ReversalRequired, 'A cancellation after posting must require finance review.');
+        AssertEqualInteger(PostedPaymentEntryNo, Payment."Posted Payment Entry No.", 'The cancellation must retain the posted customer ledger link.');
+        AssertEqualInteger(PaymentCount, CountPaymentEntries('PSP-CANCEL'), 'The cancellation must not create or reverse customer ledger entries automatically.');
     end;
 
     [Test]
@@ -49,11 +108,13 @@ codeunit 72157 "Adyen Posting Tests"
         PaymentPoster: Codeunit "Adyen Payment Poster";
         OriginalAllowFrom: Date;
         OriginalAllowTo: Date;
+        DispositionReason: Text[250];
+        LifecycleApplied: Boolean;
     begin
         ConfigurePostingEnvironment(false);
         PostInvoice('INV-CLOSED', 100);
         BuildAuthorisation(EventEntry, 'PSP-CLOSED', 100);
-        PaymentState.ImportPositivePayment(EventEntry, false);
+        PaymentState.ImportPositivePaymentWithResult(EventEntry, false, DispositionReason, LifecycleApplied);
         Payment.Get(MerchantAccount(), 'PSP-CLOSED');
 
         GeneralLedgerSetup.Get();
@@ -62,8 +123,11 @@ codeunit 72157 "Adyen Posting Tests"
         GeneralLedgerSetup."Allow Posting From" := CalcDate('<+1D>', WorkDate());
         GeneralLedgerSetup."Allow Posting To" := 0D;
         GeneralLedgerSetup.Modify(false);
-        asserterror PaymentPoster.PostAndApply(Payment);
+        asserterror PaymentPoster.PostAndApplyAutomatically(Payment);
         AssertEqualInteger(0, CountPaymentEntries('PSP-CLOSED'), 'A closed-period failure must leave no partial payment entry.');
+        Payment.Get(MerchantAccount(), 'PSP-CLOSED');
+        AssertEqualInteger(0, Payment."Posted Payment Entry No.", 'A failed posting must not link a customer ledger entry.');
+        AssertTrue(Payment."Posting Origin" = Payment."Posting Origin"::Unclassified, 'A failed posting must not classify the payment origin.');
 
         GeneralLedgerSetup."Allow Posting From" := OriginalAllowFrom;
         GeneralLedgerSetup."Allow Posting To" := OriginalAllowTo;
@@ -84,11 +148,13 @@ codeunit 72157 "Adyen Posting Tests"
         ManualJournal.CreateDraft(Payment, SecondGenJournalLine);
         AssertTrue(GenJournalLine."Line No." = SecondGenJournalLine."Line No.", 'Creating a draft twice must return the same journal line.');
         AssertEqualInteger(1, CountLinkedJournalLines(Payment.SystemId), 'Only one linked manual journal line may exist.');
+        AssertTrue(GenJournalLine."Adyen Posting Origin" = GenJournalLine."Adyen Posting Origin"::ManualJournal, 'A manual draft must carry the manual journal origin.');
 
         GenJournalLine.Delete(true);
         Payment.Get(MerchantAccount(), 'PSP-MANUAL-DELETE');
         AssertTrue(Payment.Status = Payment.Status::Imported, 'Deleting the draft must restore the prior payment state.');
         AssertEqualInteger(0, Payment."Manual Journal Line No.", 'Deleting the draft must clear the journal link.');
+        AssertTrue(Payment."Posting Origin" = Payment."Posting Origin"::Unclassified, 'Deleting an unposted draft must not classify the payment origin.');
     end;
 
     [Test]
@@ -107,6 +173,52 @@ codeunit 72157 "Adyen Posting Tests"
         Payment.Get(MerchantAccount(), 'PSP-MANUAL-POST');
         AssertTrue(Payment.Status = Payment.Status::ManuallyReconciled, 'Posting a manual draft must update its payment state.');
         AssertTrue(Payment."Posted Payment Entry No." <> 0, 'Posting a manual draft must retain its customer ledger entry.');
+        AssertTrue(Payment."Posting Origin" = Payment."Posting Origin"::ManualJournal, 'Posting a manual draft must record the manual journal origin.');
+    end;
+
+    [Test]
+    procedure PreviewingManualDraftDoesNotSetPostingOrigin()
+    var
+        GenJournalLine: Record "Gen. Journal Line";
+        Payment: Record "Imported Adyen Payment";
+        GenJnlPost: Codeunit "Gen. Jnl.-Post";
+        GenJnlPostPreview: Codeunit "Gen. Jnl.-Post Preview";
+        ManualJournal: Codeunit "Adyen Manual Journal";
+    begin
+        ConfigurePostingEnvironment(false);
+        InsertManualPayment(Payment, 'PSP-MANUAL-PREVIEW');
+        ManualJournal.CreateDraft(Payment, GenJournalLine);
+        GenJnlPostPreview.SetContext(GenJnlPost, GenJournalLine);
+
+        asserterror GenJnlPostPreview.Run();
+
+        Payment.Get(MerchantAccount(), 'PSP-MANUAL-PREVIEW');
+        AssertTrue(Payment.Status = Payment.Status::ManualJournalCreated, 'Posting preview must retain the manual-draft state.');
+        AssertEqualInteger(0, Payment."Posted Payment Entry No.", 'Posting preview must not link a customer ledger entry.');
+        AssertTrue(Payment."Posting Origin" = Payment."Posting Origin"::Unclassified, 'Posting preview must not classify the payment origin.');
+    end;
+
+    [Test]
+    procedure ManualExactMatchRecordsOrigin()
+    var
+        EventEntry: Record "Adyen Event Entry";
+        Payment: Record "Imported Adyen Payment";
+        PaymentPoster: Codeunit "Adyen Payment Poster";
+        PaymentState: Codeunit "Adyen Payment State";
+        DispositionReason: Text[250];
+        LifecycleApplied: Boolean;
+    begin
+        ConfigurePostingEnvironment(false);
+        PostInvoice('INV-MANUAL-EXACT', 100);
+        BuildAuthorisation(EventEntry, 'PSP-MANUAL-EXACT', 100);
+        PaymentState.ImportPositivePaymentWithResult(EventEntry, false, DispositionReason, LifecycleApplied);
+        Payment.Get(MerchantAccount(), 'PSP-MANUAL-EXACT');
+
+        PaymentPoster.PostAndApplyManualExactMatch(Payment);
+
+        Payment.Get(MerchantAccount(), 'PSP-MANUAL-EXACT');
+        AssertTrue(Payment."Posted Payment Entry No." <> 0, 'Manual exact-match posting must link the customer ledger entry.');
+        AssertTrue(Payment."Posting Origin" = Payment."Posting Origin"::ManualExactMatch, 'Manual exact-match posting must record the manual exact-match origin.');
     end;
 
     local procedure ConfigurePostingEnvironment(AutoPost: Boolean)
@@ -117,7 +229,7 @@ codeunit 72157 "Adyen Posting Tests"
         GenJournalTemplate: Record "Gen. Journal Template";
         GLAccount: Record "G/L Account";
         Merchant: Record "Adyen Merchant";
-        MethodPolicy: Record "Adyen Payment Method Policy";
+        MethodPolicy: Record "Adyen Merchant Method Policy";
         SourceCode: Record "Source Code";
     begin
         InsertPostingAccount(GLAccount, ReceivablesAccount());
@@ -161,6 +273,7 @@ codeunit 72157 "Adyen Posting Tests"
         Merchant.Modify(true);
 
         MethodPolicy.Init();
+        MethodPolicy."Merchant Account" := MerchantAccount();
         MethodPolicy."Payment Method" := 'scheme';
         MethodPolicy."Enabled for Auto Post" := true;
         MethodPolicy.Insert(true);

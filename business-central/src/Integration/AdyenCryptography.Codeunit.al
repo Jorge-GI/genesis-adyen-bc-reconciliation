@@ -53,15 +53,6 @@ codeunit 72032 "Adyen Cryptography"
     end;
 
     [NonDebuggable]
-    procedure VerifyWithHexKey(Item: JsonObject; HexKey: Text): Boolean
-    var
-        Base64Key: SecretText;
-    begin
-        Base64Key := HexToBase64(HexKey);
-        exit(VerifyWithBase64Key(Item, Base64Key));
-    end;
-
-    [NonDebuggable]
     local procedure VerifyWithBase64Key(Item: JsonObject; Base64Key: SecretText): Boolean
     var
         CryptographyManagement: Codeunit "Cryptography Management";

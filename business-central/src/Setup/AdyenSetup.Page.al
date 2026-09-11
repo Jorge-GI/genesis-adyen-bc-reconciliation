@@ -49,6 +49,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Set Current HMAC Key';
                 ApplicationArea = All;
                 Image = EncryptionKeys;
+                ToolTip = 'Store the current Adyen webhook HMAC key securely. The key must be a 64-character hexadecimal value and cannot be read back.';
 
                 trigger OnAction()
                 var
@@ -66,6 +67,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Rotate HMAC Key';
                 ApplicationArea = All;
                 Image = Change;
+                ToolTip = 'Replace the current HMAC key and retain it as the previous key so webhook deliveries signed during the rotation window can still be accepted.';
 
                 trigger OnAction()
                 var
@@ -83,6 +85,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Set Report Credentials';
                 ApplicationArea = All;
                 Image = EncryptionKeys;
+                ToolTip = 'Store the Adyen report username and password securely for background report downloads. Stored values cannot be read back.';
 
                 trigger OnAction()
                 var
@@ -100,6 +103,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Test Stored Credentials';
                 ApplicationArea = All;
                 Image = TestDatabase;
+                ToolTip = 'Verify that the encrypted report credentials are present and readable. This does not test a remote Adyen login.';
 
                 trigger OnAction()
                 var
@@ -114,6 +118,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Clear Previous HMAC Key';
                 ApplicationArea = All;
                 Image = Delete;
+                ToolTip = 'Remove the previous HMAC key after Adyen can no longer send webhook deliveries signed with it.';
 
                 trigger OnAction()
                 var
@@ -130,6 +135,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Clear Current HMAC Key';
                 ApplicationArea = All;
                 Image = Delete;
+                ToolTip = 'Remove the current HMAC key. New webhook submissions will be rejected until another current key is stored.';
 
                 trigger OnAction()
                 var
@@ -146,6 +152,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Clear Report Credentials';
                 ApplicationArea = All;
                 Image = Delete;
+                ToolTip = 'Remove the stored Adyen report username and password. Report downloads will fail until new credentials are stored.';
 
                 trigger OnAction()
                 var
@@ -162,6 +169,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Create Job Queue Entry';
                 ApplicationArea = All;
                 Image = Job;
+                ToolTip = 'Create or update the recurring background Job Queue entry that processes Adyen webhook requests, reports, events, deadlines, and retention.';
 
                 trigger OnAction()
                 var
@@ -175,6 +183,7 @@ page 72010 "Adyen Setup"
                 Caption = 'Run Retention Cleanup';
                 ApplicationArea = All;
                 Image = DeleteExpiredComponents;
+                ToolTip = 'Remove eligible retained webhook and report BLOB content now according to the configured retention periods. Audit metadata is preserved.';
 
                 trigger OnAction()
                 var

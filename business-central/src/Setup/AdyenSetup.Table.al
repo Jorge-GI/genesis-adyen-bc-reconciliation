@@ -10,8 +10,16 @@ table 72000 "Adyen Setup"
             Caption = 'Primary Key';
             DataClassification = SystemMetadata;
         }
-        field(2; Enabled; Boolean) { Caption = 'Enabled'; }
-        field(3; Environment; Enum "Adyen Environment") { Caption = 'Environment'; }
+        field(2; Enabled; Boolean)
+        {
+            Caption = 'Enabled';
+            ToolTip = 'Specifies whether Business Central accepts new Adyen webhook submissions. Turn this off only when rejecting new ingress is intentional.';
+        }
+        field(3; Environment; Enum "Adyen Environment")
+        {
+            Caption = 'Environment';
+            ToolTip = 'Specifies whether incoming notifications must identify the Adyen test or live environment.';
+        }
         field(4; "Allowed Report Hosts"; Text[250])
         {
             Caption = 'Allowed Report Hosts';
@@ -21,52 +29,65 @@ table 72000 "Adyen Setup"
         {
             Caption = 'Maximum Webhook Payload Bytes';
             MinValue = 1024;
+            ToolTip = 'Specifies the maximum accepted size, in bytes, of a complete webhook request payload.';
         }
         field(6; "Max Report File Bytes"; Integer)
         {
             Caption = 'Maximum Report File Bytes';
             MinValue = 1024;
+            ToolTip = 'Specifies the maximum Adyen report file size, in bytes, that the background processor may download.';
         }
-        field(7; "Report Deadline"; Time) { Caption = 'Daily Report Deadline'; }
+        field(7; "Report Deadline"; Time)
+        {
+            Caption = 'Daily Report Deadline';
+            ToolTip = 'Specifies the local daily time after which a missing report marks each affected merchant as overdue.';
+        }
         field(8; "Raw Retention Days"; Integer)
         {
             Caption = 'Raw Webhook Retention Days';
             MinValue = 1;
+            ToolTip = 'Specifies how many days raw webhook payloads are retained before cleanup removes their BLOB content. Audit metadata remains.';
         }
         field(9; "Report Retention Months"; Integer)
         {
             Caption = 'Report File Retention Months';
             MinValue = 1;
+            ToolTip = 'Specifies how many months downloaded report files are retained before cleanup removes their BLOB content. Audit metadata remains.';
         }
         field(10; "Max Messages Per Run"; Integer)
         {
             Caption = 'Maximum Messages per Run';
             MinValue = 1;
             MaxValue = 500;
+            ToolTip = 'Specifies the maximum number of queued webhook requests, events, and reports processed by one dispatcher run.';
         }
         field(11; "HMAC Key Configured"; Boolean)
         {
             Caption = 'Current HMAC Key Configured';
             Editable = false;
             DataClassification = SystemMetadata;
+            ToolTip = 'Specifies whether a current webhook HMAC key is stored securely for this company.';
         }
         field(12; "Previous HMAC Configured"; Boolean)
         {
             Caption = 'Previous HMAC Key Configured';
             Editable = false;
             DataClassification = SystemMetadata;
+            ToolTip = 'Specifies whether the previous webhook HMAC key is retained temporarily to support key rotation.';
         }
         field(13; "Report Credentials Configured"; Boolean)
         {
             Caption = 'Report Credentials Configured';
             Editable = false;
             DataClassification = SystemMetadata;
+            ToolTip = 'Specifies whether an Adyen report username and password are stored securely for this company.';
         }
         field(14; "Last Cleanup At UTC"; DateTime)
         {
             Caption = 'Last Cleanup At UTC';
             Editable = false;
             DataClassification = SystemMetadata;
+            ToolTip = 'Specifies the date and time in UTC when retained webhook and report content was last cleaned up.';
         }
     }
 

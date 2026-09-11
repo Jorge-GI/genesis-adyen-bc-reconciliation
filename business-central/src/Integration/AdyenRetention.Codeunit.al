@@ -24,13 +24,14 @@ codeunit 72045 "Adyen Retention"
         ReportCutoff := CalcDate(StrSubstNo('<-%1M>', Setup."Report Retention Months"), Today());
         ReportRun.SetAutoCalcFields(Content);
         ReportRun.SetRange("Content Purged", false);
-        ReportRun.SetFilter("Report Date", '<%1', ReportCutoff);
+        ReportRun.SetFilter("Report Date", '<>%1&<%2', 0D, ReportCutoff);
         if ReportRun.FindSet(true) then
             repeat
-                if ReportRun.Content.HasValue() then
+                if ReportRun.Content.HasValue() then begin
                     Clear(ReportRun.Content);
-                ReportRun."Content Purged" := true;
-                ReportRun.Modify(true);
+                    ReportRun."Content Purged" := true;
+                    ReportRun.Modify(true);
+                end;
             until ReportRun.Next() = 0;
 
         Setup."Last Cleanup At UTC" := CurrentDateTime();

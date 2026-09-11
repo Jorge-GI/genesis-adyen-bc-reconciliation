@@ -5,7 +5,7 @@ codeunit 72036 "Adyen Invoice Matcher"
         CustLedgerEntry: Record "Cust. Ledger Entry";
         Customer: Record Customer;
         GeneralLedgerSetup: Record "General Ledger Setup";
-        MethodPolicy: Record "Adyen Payment Method Policy";
+        MethodPolicy: Record "Adyen Merchant Method Policy";
         CandidateEntryNo: Integer;
         MatchCount: Integer;
         InvoiceCurrency: Code[10];
@@ -15,10 +15,12 @@ codeunit 72036 "Adyen Invoice Matcher"
         Payment."Match Result" := Payment."Match Result"::NotRun;
         Payment."Exception Message" := '';
 
-        if not MethodPolicy.Get(Payment."Payment Method") or not MethodPolicy."Enabled for Auto Post" then begin
+        if not MethodPolicy.Get(Payment."Merchant Account", Payment."Payment Method") or not MethodPolicy."Enabled for Auto Post" then begin
             Payment."Match Result" := Payment."Match Result"::UnsupportedMethod;
             Payment."Exception Message" := CopyStr(
-                StrSubstNo('Payment method %1 is not enabled for automatic posting.', Payment."Payment Method"),
+                StrSubstNo(
+                    'Payment method %1 is not enabled for automatic posting for merchant account %2.',
+                    Payment."Payment Method", Payment."Merchant Account"),
                 1, MaxStrLen(Payment."Exception Message"));
             exit;
         end;

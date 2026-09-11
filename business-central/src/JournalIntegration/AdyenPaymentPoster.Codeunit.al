@@ -1,7 +1,18 @@
 codeunit 72037 "Adyen Payment Poster"
 {
     [CommitBehavior(CommitBehavior::Error)]
-    procedure PostAndApply(var Payment: Record "Imported Adyen Payment")
+    procedure PostAndApplyAutomatically(var Payment: Record "Imported Adyen Payment")
+    begin
+        PostAndApplyWithOrigin(Payment, Enum::"Adyen Posting Origin"::Automatic);
+    end;
+
+    [CommitBehavior(CommitBehavior::Error)]
+    procedure PostAndApplyManualExactMatch(var Payment: Record "Imported Adyen Payment")
+    begin
+        PostAndApplyWithOrigin(Payment, Enum::"Adyen Posting Origin"::ManualExactMatch);
+    end;
+
+    local procedure PostAndApplyWithOrigin(var Payment: Record "Imported Adyen Payment"; PostingOrigin: Enum "Adyen Posting Origin")
     var
         Merchant: Record "Adyen Merchant";
         MatchedInvoice: Record "Cust. Ledger Entry";
@@ -42,6 +53,7 @@ codeunit 72037 "Adyen Payment Poster"
         GenJournalLine.Validate("Applies-to Doc. Type", GenJournalLine."Applies-to Doc. Type"::Invoice);
         GenJournalLine.Validate("Applies-to Doc. No.", MatchedInvoice."Document No.");
         GenJournalLine."Adyen Payment ID" := Payment.SystemId;
+        GenJournalLine."Adyen Posting Origin" := PostingOrigin;
         GenJournalLine.Insert(true);
 
         GenJournalPostLine.RunWithCheck(GenJournalLine);

@@ -50,6 +50,13 @@ codeunit 72156 "Adyen Operations Tests"
         EventEntry."Message Type" := 'AUTHORISATION';
         EventEntry."Merchant Account" := Merchant."Merchant Account";
         EventEntry."PSP Reference" := 'RETENTION-PSP';
+        EventEntry."Webhook Request Entry No." := WebhookEntryNo;
+        EventEntry."Payload Hash" := 'RETENTION-EVENT-HASH';
+        EventEntry.Reason := 'Source reason';
+        EventEntry."Disposition Reason" := 'Audit decision';
+        EventEntry."Previous Lifecycle Status" := EventEntry."Previous Lifecycle Status"::Authorised;
+        EventEntry."Resulting Lifecycle Status" := EventEntry."Resulting Lifecycle Status"::Authorised;
+        EventEntry."Lifecycle Effect" := EventEntry."Lifecycle Effect"::NotApplied;
         EventEntry.Insert(true);
 
         Payment.Init();
@@ -66,7 +73,43 @@ codeunit 72156 "Adyen Operations Tests"
         ReportRun.CalcFields(Content);
         AssertTrue(ReportRun."Content Purged" and not ReportRun.Content.HasValue(), 'Report content must be purged and metadata retained.');
         AssertTrue(EventEntry.Get(EventId), 'Normalized events must survive cleanup.');
+        AssertTrue(EventEntry."Webhook Request Entry No." = WebhookEntryNo, 'The event source link must survive cleanup.');
+        AssertTrue(EventEntry."Payload Hash" = 'RETENTION-EVENT-HASH', 'The event hash must survive cleanup.');
+        AssertTrue(EventEntry.Reason = 'Source reason', 'The original source reason must survive cleanup.');
+        AssertTrue(EventEntry."Disposition Reason" = 'Audit decision', 'The decision reason must survive cleanup.');
+        AssertTrue(EventEntry."Previous Lifecycle Status" = EventEntry."Previous Lifecycle Status"::Authorised, 'The previous lifecycle must survive cleanup.');
+        AssertTrue(EventEntry."Resulting Lifecycle Status" = EventEntry."Resulting Lifecycle Status"::Authorised, 'The resulting lifecycle must survive cleanup.');
+        AssertTrue(EventEntry."Lifecycle Effect" = EventEntry."Lifecycle Effect"::NotApplied, 'The recorded lifecycle effect must survive cleanup.');
         AssertTrue(Payment.Get(Merchant."Merchant Account", 'RETENTION-PSP'), 'Imported payments must survive cleanup.');
+    end;
+
+    [Test]
+    procedure RetentionDoesNotPurgeAnUndownloadedReport()
+    var
+        Merchant: Record "Adyen Merchant";
+        ReportRun: Record "Adyen Report Run";
+        Setup: Record "Adyen Setup";
+        Retention: Codeunit "Adyen Retention";
+        ReportEntryNo: BigInteger;
+    begin
+        Setup.GetRecordOnce();
+        Setup."Report Retention Months" := 1;
+        Setup.Modify(true);
+        InsertMerchant(Merchant, 'PendingRetentionMerchant');
+
+        ReportRun.Init();
+        ReportRun."Merchant Account" := Merchant."Merchant Account";
+        ReportRun."External Report ID" := 'pending_2026_09_03.csv';
+        ReportRun."Download URL" := 'https://ca-test.adyen.com/report.csv';
+        ReportRun.Insert(true);
+        ReportEntryNo := ReportRun."Entry No.";
+
+        Retention.RunCleanup();
+
+        ReportRun.Get(ReportEntryNo);
+        AssertTrue(ReportRun."Report Date" = 0D, 'An undownloaded report must still have a blank report date.');
+        AssertTrue(not ReportRun."Content Purged", 'Retention must not mark an undownloaded report as purged.');
+        AssertTrue(ReportRun.Status = ReportRun.Status::Requested, 'Retention must leave an undownloaded report retryable.');
     end;
 
     [Test]

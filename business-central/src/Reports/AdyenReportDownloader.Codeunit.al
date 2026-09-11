@@ -1,5 +1,8 @@
 codeunit 72040 "Adyen Report Downloader"
 {
+    var
+        ReportTooLargeErr: Label 'The report exceeds the configured maximum of %1 bytes.';
+
     [NonDebuggable]
     procedure Download(var ReportRun: Record "Adyen Report Run")
     var
@@ -31,7 +34,7 @@ codeunit 72040 "Adyen Report Downloader"
             DownloadContent(ReportRun."Download URL", UserName, Password, Setup."Max Report File Bytes", TempBlob);
 
         if TempBlob.Length() > Setup."Max Report File Bytes" then
-            Error('The report exceeds the configured maximum of %1 bytes.', Setup."Max Report File Bytes");
+            Error(ReportTooLargeErr, Setup."Max Report File Bytes");
         if TempBlob.Length() = 0 then
             Error('The downloaded report is empty.');
 
@@ -40,6 +43,7 @@ codeunit 72040 "Adyen Report Downloader"
         TempBlob.CreateInStream(CopyInStream);
         ReportRun.Content.CreateOutStream(ReportOutStream);
         CopyStream(ReportOutStream, CopyInStream);
+        ReportRun."Content Purged" := false;
         ReportRun.Status := ReportRun.Status::Loading;
         ReportRun.Modify(true);
     end;
@@ -53,7 +57,6 @@ codeunit 72040 "Adyen Report Downloader"
         Response: HttpResponseMessage;
         Headers: HttpHeaders;
         ResponseInStream: InStream;
-        TempOutStream: OutStream;
         UserAndPassword: SecretText;
         EncodedCredentials: SecretText;
         Authorization: SecretText;
@@ -71,8 +74,23 @@ codeunit 72040 "Adyen Report Downloader"
             Error('Adyen report download failed with HTTP status %1 (%2).', Response.HttpStatusCode(), Response.ReasonPhrase());
 
         Response.Content.ReadAs(ResponseInStream);
+        CopyResponseToTempBlob(ResponseInStream, MaximumBytes, TempBlob);
+    end;
+
+    internal procedure CopyResponseToTempBlob(ResponseInStream: InStream; MaximumBytes: Integer; var TempBlob: Codeunit "Temp Blob")
+    var
+        TempOutStream: OutStream;
+        ResponseLength: BigInteger;
+    begin
+        ResponseLength := ResponseInStream.Length();
+        if (ResponseLength >= 0) and (ResponseLength > MaximumBytes) then
+            Error(ReportTooLargeErr, MaximumBytes);
+
         TempBlob.CreateOutStream(TempOutStream);
-        CopyStream(TempOutStream, ResponseInStream, MaximumBytes + 1);
+        CopyStream(TempOutStream, ResponseInStream);
+
+        if TempBlob.Length() > MaximumBytes then
+            Error(ReportTooLargeErr, MaximumBytes);
     end;
 
     procedure ValidateDownloadUrl(DownloadUrl: Text; AllowedHosts: Text)

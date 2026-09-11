@@ -44,6 +44,7 @@ codeunit 72038 "Adyen Manual Journal"
         GenJournalLine.Validate("Bal. Account Type", GenJournalLine."Bal. Account Type"::"G/L Account");
         GenJournalLine.Validate("Bal. Account No.", Merchant."Clearing G/L Account No.");
         GenJournalLine."Adyen Payment ID" := Payment.SystemId;
+        GenJournalLine."Adyen Posting Origin" := GenJournalLine."Adyen Posting Origin"::ManualJournal;
         GenJournalLine.Insert(true);
 
         Payment."Status Before Manual" := Payment.Status;

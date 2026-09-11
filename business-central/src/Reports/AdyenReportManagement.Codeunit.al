@@ -1,5 +1,14 @@
 codeunit 72043 "Adyen Report Management"
 {
+    procedure Retry(var ReportRun: Record "Adyen Report Run")
+    begin
+        ReportRun.TestField(Status, ReportRun.Status::Error);
+        ReportRun.TestField("Download URL");
+        ReportRun.Status := ReportRun.Status::Requested;
+        ReportRun."Last Error" := '';
+        ReportRun.Modify(true);
+    end;
+
     procedure RegisterAvailable(EventEntry: Record "Adyen Event Entry")
     var
         ReportRun: Record "Adyen Report Run";

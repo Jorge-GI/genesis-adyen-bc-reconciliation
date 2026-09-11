@@ -81,15 +81,47 @@ codeunit 72155 "Adyen Matching Tests"
         AssertTrue(Payment."Match Result" = Payment."Match Result"::UniqueExact, 'Blank payment currency must normalize to LCY.');
     end;
 
-    local procedure EnableMethod(PaymentMethod: Code[50])
+    [Test]
+    procedure MethodPoliciesAreIsolatedByMerchantAccount()
     var
-        MethodPolicy: Record "Adyen Payment Method Policy";
+        Customer: Record Customer;
+        Payment: Record "Imported Adyen Payment";
+        Matcher: Codeunit "Adyen Invoice Matcher";
     begin
-        if MethodPolicy.Get(PaymentMethod) then
+        SetMethodPolicy('MerchantA', 'scheme', true);
+        SetMethodPolicy('MerchantB', 'scheme', false);
+        InsertCustomer(Customer, 'ADY-MERCHANT-POLICY');
+        InsertOpenInvoice(Customer."No.", 'ADY-INV-MERCHANT', '', 100);
+
+        BuildPaymentForMerchant(Payment, 'MerchantA', Customer."No.", 'scheme');
+        Matcher.Match(Payment);
+        AssertTrue(Payment."Match Result" = Payment."Match Result"::UniqueExact, 'An enabled policy must allow matching for its merchant.');
+
+        BuildPaymentForMerchant(Payment, 'MerchantB', Customer."No.", 'scheme');
+        Matcher.Match(Payment);
+        AssertTrue(Payment."Match Result" = Payment."Match Result"::UnsupportedMethod, 'A disabled policy must stop matching for its merchant.');
+        AssertTrue(StrPos(Payment."Exception Message", 'MerchantB') > 0, 'The method exception must identify the merchant account.');
+
+        BuildPaymentForMerchant(Payment, 'MerchantC', Customer."No.", 'scheme');
+        Matcher.Match(Payment);
+        AssertTrue(Payment."Match Result" = Payment."Match Result"::UnsupportedMethod, 'A policy for another merchant must not be used as a fallback.');
+    end;
+
+    local procedure EnableMethod(PaymentMethod: Code[50])
+    begin
+        SetMethodPolicy(MerchantAccount(), PaymentMethod, true);
+    end;
+
+    local procedure SetMethodPolicy(MerchantAccountValue: Text; PaymentMethod: Code[50]; Enabled: Boolean)
+    var
+        MethodPolicy: Record "Adyen Merchant Method Policy";
+    begin
+        if MethodPolicy.Get(MerchantAccountValue, PaymentMethod) then
             MethodPolicy.Delete(false);
         MethodPolicy.Init();
+        MethodPolicy."Merchant Account" := MerchantAccountValue;
         MethodPolicy."Payment Method" := PaymentMethod;
-        MethodPolicy."Enabled for Auto Post" := true;
+        MethodPolicy."Enabled for Auto Post" := Enabled;
         MethodPolicy.Insert(false);
     end;
 
@@ -105,11 +137,22 @@ codeunit 72155 "Adyen Matching Tests"
 
     local procedure BuildPayment(var Payment: Record "Imported Adyen Payment"; ShopperReference: Text; PaymentMethod: Code[50])
     begin
+        BuildPaymentForMerchant(Payment, MerchantAccount(), ShopperReference, PaymentMethod);
+    end;
+
+    local procedure BuildPaymentForMerchant(var Payment: Record "Imported Adyen Payment"; MerchantAccountValue: Text; ShopperReference: Text; PaymentMethod: Code[50])
+    begin
         Clear(Payment);
         Payment.Init();
+        Payment."Merchant Account" := MerchantAccountValue;
         Payment."Shopper Reference" := ShopperReference;
         Payment."Payment Method" := PaymentMethod;
         Payment.Amount := 100;
+    end;
+
+    local procedure MerchantAccount(): Text
+    begin
+        exit('MatchingMerchant');
     end;
 
     local procedure InsertOpenInvoice(CustomerNo: Code[20]; DocumentNo: Code[20]; CurrencyCode: Code[10]; RemainingAmount: Decimal)

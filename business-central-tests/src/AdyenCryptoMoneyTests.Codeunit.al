@@ -6,27 +6,35 @@ codeunit 72150 "Adyen Crypto Money Tests"
     [Test]
     procedure HmacVectorAndEscapingAreAccepted()
     var
+        Credentials: Codeunit "Adyen Credentials";
         Crypto: Codeunit "Adyen Cryptography";
         Item: JsonObject;
     begin
+        Credentials.ClearPreviousHmac();
+        Credentials.SetCurrentHmacHex(HmacKey());
         Item := CreateSignedItem('LkSKgyRPvceAQl8+bWrDIVTejATF56CjvObTPC9CNDw=', 12345);
         AssertEqualText(
             '8831234567890123::GenesisMerchant:ORDER\:1\\A:12345:EUR:AUTHORISATION:true',
             Crypto.BuildSigningValue(Item), 'The canonical Adyen signing value is incorrect.');
-        AssertTrue(Crypto.VerifyWithHexKey(Item, HmacKey()), 'The published HMAC vector was rejected.');
+        AssertTrue(Crypto.VerifyNotification(Item), 'The published HMAC vector was rejected.');
+        Credentials.ClearCurrentHmac();
     end;
 
     [Test]
     procedure ChangedAmountAndMalformedSignatureAreRejected()
     var
+        Credentials: Codeunit "Adyen Credentials";
         Crypto: Codeunit "Adyen Cryptography";
         Item: JsonObject;
     begin
+        Credentials.ClearPreviousHmac();
+        Credentials.SetCurrentHmacHex(HmacKey());
         Item := CreateSignedItem('LkSKgyRPvceAQl8+bWrDIVTejATF56CjvObTPC9CNDw=', 12346);
-        AssertFalse(Crypto.VerifyWithHexKey(Item, HmacKey()), 'A changed amount must invalidate the signature.');
+        AssertFalse(Crypto.VerifyNotification(Item), 'A changed amount must invalidate the signature.');
 
         Item := CreateSignedItem('not-base64', 12345);
-        AssertFalse(Crypto.VerifyWithHexKey(Item, HmacKey()), 'A malformed signature must be rejected.');
+        AssertFalse(Crypto.VerifyNotification(Item), 'A malformed signature must be rejected.');
+        Credentials.ClearCurrentHmac();
     end;
 
     [Test]

@@ -1,34 +1,26 @@
 codeunit 72042 "Adyen Report Reconciler"
 {
-    procedure ReconcileSentForSettle(EventEntry: Record "Adyen Event Entry")
+    procedure ReconcilePositiveLifecycleWithResult(EventEntry: Record "Adyen Event Entry"; var DispositionReason: Text[250]; var LifecycleApplied: Boolean)
     var
         Payment: Record "Imported Adyen Payment";
         PaymentState: Codeunit "Adyen Payment State";
         PaymentReference: Code[50];
     begin
+        Clear(DispositionReason);
+        LifecycleApplied := false;
         PaymentReference := PaymentState.GetOriginalPaymentReference(EventEntry);
         if not Payment.Get(EventEntry."Merchant Account", PaymentReference) then begin
-            PaymentState.ImportPositivePayment(EventEntry, true);
-            Payment.Get(EventEntry."Merchant Account", PaymentReference);
-            Payment."Report Status" := Payment."Report Status"::Confirmed;
-            Payment.Modify(true);
+            PaymentState.ImportPositivePaymentWithResult(EventEntry, true, DispositionReason, LifecycleApplied);
             exit;
         end;
 
-        if (Payment.Status <> Payment.Status::ReversalRequired) and
-           (Payment."Shopper Reference" = EventEntry."Shopper Reference") and
-           (Payment."Currency Code" = EventEntry."Currency Code") and
-           (Payment.Amount = EventEntry.Amount)
-        then begin
-            Payment."Report Status" := Payment."Report Status"::Confirmed;
-            Payment.Modify(true);
+        LifecycleApplied := PaymentState.ApplyLifecycleToPayment(Payment, EventEntry, DispositionReason);
+        if not LifecycleApplied then
             exit;
-        end;
 
-        Payment."Report Status" := Payment."Report Status"::Discrepancy;
-        Payment."Exception Message" := CopyStr(
-            StrSubstNo('Report row %1 differs from the imported payment customer, currency, amount, or lifecycle state.', EventEntry."Report Row No."),
-            1, MaxStrLen(Payment."Exception Message"));
+        if not PaymentState.HasSameReportData(Payment, EventEntry) then
+            PaymentState.MarkDataConflict(Payment, EventEntry);
         Payment.Modify(true);
     end;
+
 }

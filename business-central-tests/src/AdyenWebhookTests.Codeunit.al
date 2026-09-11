@@ -22,6 +22,45 @@ codeunit 72151 "Adyen Webhook Tests"
     end;
 
     [Test]
+    procedure PlainTextApiPayloadIsStoredInBlob()
+    var
+        WebhookRequest: Record "Adyen Webhook Request";
+        Intake: Codeunit "Adyen Webhook Intake";
+        PayloadInStream: InStream;
+        ActualPayload: Text;
+        ExpectedPayload: Text;
+    begin
+        ConfigureIntegration();
+        ExpectedPayload := BuildEnvelope(1);
+        WebhookRequest.Init();
+        WebhookRequest."Flow Run ID" := 'flow-text';
+        WebhookRequest."Content Type" := 'application/json';
+
+        AssertTrue(
+            Intake.AcceptText(WebhookRequest, ExpectedPayload),
+            'The connector-compatible JSON text payload must be accepted.');
+
+        WebhookRequest.CalcFields(Payload);
+        WebhookRequest.Payload.CreateInStream(PayloadInStream, TextEncoding::UTF8);
+        PayloadInStream.ReadText(ActualPayload);
+        AssertEqualText(ExpectedPayload, ActualPayload, 'BC must retain the JSON text in the raw-request BLOB.');
+    end;
+
+    [Test]
+    procedure EmptyTextApiPayloadIsRejected()
+    var
+        WebhookRequest: Record "Adyen Webhook Request";
+        Intake: Codeunit "Adyen Webhook Intake";
+    begin
+        ConfigureIntegration();
+        WebhookRequest.Init();
+        WebhookRequest."Flow Run ID" := 'flow-empty-text';
+        WebhookRequest."Content Type" := 'application/json';
+
+        asserterror Intake.AcceptText(WebhookRequest, '');
+    end;
+
+    [Test]
     procedure ExactDuplicateDeliveryIsIdempotent()
     var
         FirstRequest: Record "Adyen Webhook Request";
@@ -201,6 +240,12 @@ codeunit 72151 "Adyen Webhook Tests"
     end;
 
     local procedure AssertEqualInteger(Expected: Integer; Actual: Integer; FailureMessage: Text)
+    begin
+        if Expected <> Actual then
+            Error('%1 Expected %2, actual %3.', FailureMessage, Expected, Actual);
+    end;
+
+    local procedure AssertEqualText(Expected: Text; Actual: Text; FailureMessage: Text)
     begin
         if Expected <> Actual then
             Error('%1 Expected %2, actual %3.', FailureMessage, Expected, Actual);

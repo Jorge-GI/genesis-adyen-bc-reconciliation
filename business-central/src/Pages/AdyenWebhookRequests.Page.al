@@ -3,6 +3,7 @@ page 72012 "Adyen Webhook Requests"
     PageType = List;
     Caption = 'Adyen Webhook Requests';
     SourceTable = "Adyen Webhook Request";
+    SourceTableView = sorting("Received At UTC", "Entry No.") order(descending);
     UsageCategory = History;
     ApplicationArea = All;
     Editable = false;
@@ -36,6 +37,7 @@ page 72012 "Adyen Webhook Requests"
                 Caption = 'Retry';
                 ApplicationArea = All;
                 Image = Refresh;
+                ToolTip = 'Return the selected errored webhook request to the queue so its retained payload can be normalized again.';
                 Enabled = Rec.Status = Rec.Status::Error;
 
                 trigger OnAction()
@@ -52,6 +54,7 @@ page 72012 "Adyen Webhook Requests"
                 Caption = 'Download Payload';
                 ApplicationArea = All;
                 Image = ExportFile;
+                ToolTip = 'Download the retained raw webhook envelope as a JSON file. This is unavailable after retention cleanup purges the payload.';
 
                 trigger OnAction()
                 var

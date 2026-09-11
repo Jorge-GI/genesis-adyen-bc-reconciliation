@@ -12,12 +12,14 @@ page 72019 "Adyen Report Credentials"
             {
                 ApplicationArea = All;
                 Caption = 'User Name';
+                ToolTip = 'Specifies the user name for the Adyen report Basic Auth account.';
             }
             field(Password; Password)
             {
                 ApplicationArea = All;
                 Caption = 'Password';
                 ExtendedDatatype = Masked;
+                ToolTip = 'Specifies the password for the Adyen report Basic Auth account. The password is masked and cannot be read back after it is saved.';
             }
         }
     }

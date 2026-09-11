@@ -10,7 +10,8 @@ permissionset 72062 "ADYEN FINANCE"
         tabledata "Adyen Event Entry" = RM,
         tabledata "Adyen Report Run" = RM,
         tabledata "Imported Adyen Payment" = RM,
-        tabledata "Adyen Payment Method Policy" = R,
+        tabledata "Adyen Merchant Method Policy" = R,
+        tabledata "Adyen Role Center Cue" = RI,
         tabledata "Gen. Journal Line" = RIMD,
         tabledata "Cust. Ledger Entry" = R,
         tabledata "Detailed Cust. Ledg. Entry" = R,
@@ -23,10 +24,17 @@ permissionset 72062 "ADYEN FINANCE"
         codeunit "Adyen Invoice Matcher" = X,
         codeunit "Adyen Payment Poster" = X,
         codeunit "Adyen Manual Journal" = X,
+        codeunit "Adyen Event Disposition" = X,
         codeunit "Gen. Jnl.-Post Line" = X,
         page "Adyen Webhook Requests" = X,
         page "Adyen Event Entries" = X,
+        page "Adyen Payment Lifecycle Events" = X,
         page "Imported Adyen Payments" = X,
         page "Adyen Payment Exceptions" = X,
-        page "Adyen Report Runs" = X;
+        page "Adyen Report Runs" = X,
+        page "Posted Adyen Payments" = X,
+        page "Adyen Activities" = X,
+        page "Adyen Job Queue Activities" = X,
+        page "Adyen Role Center Actions" = X,
+        page "Adyen Reconciliation RC" = X;
 }

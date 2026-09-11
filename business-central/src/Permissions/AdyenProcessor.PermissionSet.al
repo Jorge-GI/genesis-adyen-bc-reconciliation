@@ -10,7 +10,7 @@ permissionset 72061 "ADYEN PROCESSOR"
         tabledata "Adyen Event Entry" = RIM,
         tabledata "Adyen Report Run" = RIM,
         tabledata "Imported Adyen Payment" = RIM,
-        tabledata "Adyen Payment Method Policy" = R,
+        tabledata "Adyen Merchant Method Policy" = R,
         tabledata "Gen. Journal Line" = RIMD,
         tabledata "Cust. Ledger Entry" = R,
         tabledata "Detailed Cust. Ledg. Entry" = R,
@@ -36,5 +36,6 @@ permissionset 72061 "ADYEN PROCESSOR"
         codeunit "Adyen Webhook Worker" = X,
         codeunit "Adyen Report Worker" = X,
         codeunit "Adyen Event Worker" = X,
+        codeunit "Adyen Event Disposition" = X,
         codeunit "Gen. Jnl.-Post Line" = X;
 }

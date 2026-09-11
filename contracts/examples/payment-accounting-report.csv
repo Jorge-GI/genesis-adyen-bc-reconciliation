@@ -1,3 +1,5 @@
-Extra,Record Type,PSP Reference,Merchant Reference,Payment Currency,Captured (PC),Booking Date,Booking Time,Shopper Reference,Merchant Account,Payment Method Variant,Modification PSP Reference
-ignored,SentForSettle,8831234567890123,"ORDER,1",EUR,123.45,2026-09-03,10:05:00,CUST-10000,GenesisMerchant,scheme,
-ignored,Chargeback,8831234567890123,"ORDER,1",EUR,-123.45,2026-09-05,11:15:00,CUST-10000,GenesisMerchant,scheme,9911234567890999
+Extra,Record Type,PSP Reference,Merchant Reference,Payment Currency,Authorised (PC),Captured (PC),Booking Date,TimeZone,Shopper Reference,Merchant Account,Payment Method Variant,Modification PSP Reference
+ignored,Authorised,8831234567890123,"ORDER,1",EUR,123.45,0.00,2026-09-03 10:00:00,CEST,CUST-10000,GenesisMerchant,scheme,
+ignored,SentForSettle,8831234567890123,"ORDER,1",EUR,123.45,123.45,2026-09-03 10:05:00,CEST,CUST-10000,GenesisMerchant,scheme,
+ignored,Settled,8831234567890123,"ORDER,1",EUR,123.45,123.45,2026-09-03 11:30:00,CEST,CUST-10000,GenesisMerchant,scheme,
+ignored,Chargeback,8831234567890123,"ORDER,1",EUR,123.45,-123.45,2026-09-05 11:15:00,CEST,CUST-10000,GenesisMerchant,scheme,9911234567890999
