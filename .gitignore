@@ -7,5 +7,5 @@
 **/TestResults/
 .vs/
 .tools/
-.vscode/.alcache/
+**/.vscode/
 infra/*.bicepparam
