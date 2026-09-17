@@ -42,6 +42,39 @@ page 72013 "Adyen Event Entries"
     {
         area(Processing)
         {
+            action(OpenSource)
+            {
+                Caption = 'Open Source';
+                ApplicationArea = All;
+                Image = ViewDetails;
+                Scope = Repeater;
+                ToolTip = 'Open the webhook request or report run from which the selected event originated.';
+
+                trigger OnAction()
+                var
+                    ReportRun: Record "Adyen Report Run";
+                    WebhookRequest: Record "Adyen Webhook Request";
+                begin
+                    case Rec.Source of
+                        Rec.Source::Webhook:
+                            begin
+                                Rec.TestField("Webhook Request Entry No.");
+                                if not WebhookRequest.Get(Rec."Webhook Request Entry No.") then
+                                    Error('Webhook request %1 no longer exists.', Rec."Webhook Request Entry No.");
+                                WebhookRequest.SetRecFilter();
+                                Page.Run(Page::"Adyen Webhook Requests", WebhookRequest);
+                            end;
+                        Rec.Source::Report:
+                            begin
+                                Rec.TestField("Report Run Entry No.");
+                                if not ReportRun.Get(Rec."Report Run Entry No.") then
+                                    Error('Report run %1 no longer exists.', Rec."Report Run Entry No.");
+                                ReportRun.SetRecFilter();
+                                Page.Run(Page::"Adyen Report Runs", ReportRun);
+                            end;
+                    end;
+                end;
+            }
             action(Retry)
             {
                 Caption = 'Retry';

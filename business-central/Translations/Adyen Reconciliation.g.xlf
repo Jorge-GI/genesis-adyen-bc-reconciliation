@@ -1583,6 +1583,16 @@
           <note from="Developer" annotates="general" priority="2"></note>
           <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Event Entries - Control Adyen Reason - Property Caption</note>
         </trans-unit>
+        <trans-unit id="Page 2545352155 - Action 1711048043 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open the webhook request or report run from which the selected event originated.</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Event Entries - Action OpenSource - Property ToolTip</note>
+        </trans-unit>
+        <trans-unit id="Page 2545352155 - Action 1711048043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
+          <source>Open Source</source>
+          <note from="Developer" annotates="general" priority="2"></note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Event Entries - Action OpenSource - Property Caption</note>
+        </trans-unit>
         <trans-unit id="Page 2545352155 - Action 3488904508 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Return the selected errored event to the queue so lifecycle, matching, and reconciliation processing can run again.</source>
           <note from="Developer" annotates="general" priority="2"></note>

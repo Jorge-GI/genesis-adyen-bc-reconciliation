@@ -53,6 +53,7 @@ page 72025 "Adyen Payment Lifecycle Events"
                 Caption = 'Open Source';
                 ApplicationArea = All;
                 Image = ViewDetails;
+                Scope = Repeater;
                 ToolTip = 'Open the webhook request or report run from which the selected event originated.';
 
                 trigger OnAction()

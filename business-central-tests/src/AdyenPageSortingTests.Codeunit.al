@@ -261,6 +261,35 @@ codeunit 72158 "Adyen Page Sorting Tests"
     end;
 
     [Test]
+    [HandlerFunctions('SourceWebhookPageHandler')]
+    procedure EventEntriesWebhookSourceOpensBeforeAndAfterContentPurge()
+    var
+        EventEntry: Record "Adyen Event Entry";
+        WebhookRequest: Record "Adyen Webhook Request";
+        OtherRequest: Record "Adyen Webhook Request";
+        ContentOutStream: OutStream;
+    begin
+        InsertWebhookRequest(WebhookRequest, OlderDateTime(), WebhookRequest.Status::Processed);
+        WebhookRequest.Payload.CreateOutStream(ContentOutStream, TextEncoding::UTF8);
+        ContentOutStream.WriteText('{"audit":true}');
+        WebhookRequest.Modify(false);
+        InsertWebhookRequest(OtherRequest, NewerDateTime(), OtherRequest.Status::Processed);
+        InsertEvent(EventEntry, SortMerchantAccount(), 'AUDIT-EVENT-ENTRIES-WEBHOOK', 'AUDIT-EVENT-ENTRIES-PAYMENT', OlderDateTime(), EventEntry.Status::Processed);
+        EventEntry."Webhook Request Entry No." := WebhookRequest."Entry No.";
+        EventEntry.Modify(false);
+
+        ExpectedFirstWebhookEntryNo := WebhookRequest."Entry No.";
+        ExpectedSourcePurged := false;
+        OpenEventEntrySource(EventEntry);
+
+        Clear(WebhookRequest.Payload);
+        WebhookRequest."Raw Content Purged" := true;
+        WebhookRequest.Modify(false);
+        ExpectedSourcePurged := true;
+        OpenEventEntrySource(EventEntry);
+    end;
+
+    [Test]
     [HandlerFunctions('SourceReportPageHandler')]
     procedure LifecycleReportSourceOpensBeforeAndAfterContentPurge()
     var
@@ -290,6 +319,36 @@ codeunit 72158 "Adyen Page Sorting Tests"
         OpenLifecycleSource(EventEntry);
     end;
 
+    [Test]
+    [HandlerFunctions('SourceReportPageHandler')]
+    procedure EventEntriesReportSourceOpensBeforeAndAfterContentPurge()
+    var
+        EventEntry: Record "Adyen Event Entry";
+        ReportRun: Record "Adyen Report Run";
+        OtherReport: Record "Adyen Report Run";
+        ContentOutStream: OutStream;
+    begin
+        InsertReportRun(ReportRun, 'AUDIT-EVENT-ENTRIES-REPORT', OlderDateTime(), ReportRun.Status::Processed);
+        ReportRun.Content.CreateOutStream(ContentOutStream, TextEncoding::UTF8);
+        ContentOutStream.WriteText('audit-content');
+        ReportRun.Modify(false);
+        InsertReportRun(OtherReport, 'AUDIT-EVENT-ENTRIES-OTHER-REPORT', NewerDateTime(), OtherReport.Status::Processed);
+        InsertEvent(EventEntry, SortMerchantAccount(), 'AUDIT-EVENT-ENTRIES-REPORT-EVENT', 'AUDIT-EVENT-ENTRIES-PAYMENT', OlderDateTime(), EventEntry.Status::Processed);
+        EventEntry.Source := EventEntry.Source::Report;
+        EventEntry."Report Run Entry No." := ReportRun."Entry No.";
+        EventEntry.Modify(false);
+
+        ExpectedFirstReportId := ReportRun."External Report ID";
+        ExpectedSourcePurged := false;
+        OpenEventEntrySource(EventEntry);
+
+        Clear(ReportRun.Content);
+        ReportRun."Content Purged" := true;
+        ReportRun.Modify(false);
+        ExpectedSourcePurged := true;
+        OpenEventEntrySource(EventEntry);
+    end;
+
     local procedure OpenLifecycleSource(EventEntry: Record "Adyen Event Entry")
     var
         LifecycleEvents: TestPage "Adyen Payment Lifecycle Events";
@@ -299,6 +358,17 @@ codeunit 72158 "Adyen Page Sorting Tests"
         AssertTrue(LifecycleEvents.First(), 'The lifecycle event must remain available.');
         LifecycleEvents.OpenSource.Invoke();
         LifecycleEvents.Close();
+    end;
+
+    local procedure OpenEventEntrySource(EventEntry: Record "Adyen Event Entry")
+    var
+        EventEntries: TestPage "Adyen Event Entries";
+    begin
+        EventEntries.OpenView();
+        EventEntries.Filter.SetFilter("PSP Reference", EventEntry."PSP Reference");
+        AssertTrue(EventEntries.First(), 'The event entry must remain available.');
+        EventEntries.OpenSource.Invoke();
+        EventEntries.Close();
     end;
 
     [PageHandler]
