@@ -192,8 +192,8 @@ codeunit 72158 "Adyen Page Sorting Tests"
     end;
 
     [Test]
-    [HandlerFunctions('LifecycleEventsPageHandler')]
-    procedure LifecycleEventsPreservePaymentFilterAndOpenNewestFirst()
+    [HandlerFunctions('PaymentEventHistoryPageHandler')]
+    procedure PaymentEventHistoryPreservesPaymentFilterAndOpensNewestFirst()
     var
         NewerEvent: Record "Adyen Event Entry";
         OlderEvent: Record "Adyen Event Entry";
@@ -208,7 +208,7 @@ codeunit 72158 "Adyen Page Sorting Tests"
         NewerEvent.SetCurrentKey("Merchant Account", "Payment PSP Reference", "Occurred At UTC");
         NewerEvent.SetRange("Merchant Account", SortMerchantAccount());
         NewerEvent.SetRange("Payment PSP Reference", NewerEvent."Payment PSP Reference");
-        Page.Run(Page::"Adyen Payment Lifecycle Events", NewerEvent);
+        Page.Run(Page::"Adyen Payment Event History", NewerEvent);
     end;
 
     [PageHandler]
@@ -351,13 +351,13 @@ codeunit 72158 "Adyen Page Sorting Tests"
 
     local procedure OpenLifecycleSource(EventEntry: Record "Adyen Event Entry")
     var
-        LifecycleEvents: TestPage "Adyen Payment Lifecycle Events";
+        PaymentEventHistory: TestPage "Adyen Payment Event History";
     begin
-        LifecycleEvents.OpenView();
-        LifecycleEvents.Filter.SetFilter("PSP Reference", EventEntry."PSP Reference");
-        AssertTrue(LifecycleEvents.First(), 'The lifecycle event must remain available.');
-        LifecycleEvents.OpenSource.Invoke();
-        LifecycleEvents.Close();
+        PaymentEventHistory.OpenView();
+        PaymentEventHistory.Filter.SetFilter("PSP Reference", EventEntry."PSP Reference");
+        AssertTrue(PaymentEventHistory.First(), 'The payment event history must remain available.');
+        PaymentEventHistory.OpenSource.Invoke();
+        PaymentEventHistory.Close();
     end;
 
     local procedure OpenEventEntrySource(EventEntry: Record "Adyen Event Entry")
@@ -402,13 +402,13 @@ codeunit 72158 "Adyen Page Sorting Tests"
     end;
 
     [PageHandler]
-    procedure LifecycleEventsPageHandler(var LifecycleEvents: TestPage "Adyen Payment Lifecycle Events")
+    procedure PaymentEventHistoryPageHandler(var PaymentEventHistory: TestPage "Adyen Payment Event History")
     begin
-        AssertTrue(LifecycleEvents.First(), 'The filtered lifecycle-event page must contain records.');
-        LifecycleEvents."PSP Reference".AssertEquals(ExpectedFirstEventPspReference);
-        AssertTrue(LifecycleEvents.Next(), 'The filtered lifecycle-event page must contain the older event.');
-        LifecycleEvents."PSP Reference".AssertEquals(ExpectedSecondEventPspReference);
-        LifecycleEvents.Close();
+        AssertTrue(PaymentEventHistory.First(), 'The filtered payment-event history page must contain records.');
+        PaymentEventHistory."PSP Reference".AssertEquals(ExpectedFirstEventPspReference);
+        AssertTrue(PaymentEventHistory.Next(), 'The filtered payment-event history page must contain the older event.');
+        PaymentEventHistory."PSP Reference".AssertEquals(ExpectedSecondEventPspReference);
+        PaymentEventHistory.Close();
     end;
 
     [PageHandler]

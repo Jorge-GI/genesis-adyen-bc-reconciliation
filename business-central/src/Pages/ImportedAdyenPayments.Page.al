@@ -137,9 +137,9 @@ page 72014 "Imported Adyen Payments"
                     Page.Run(Page::"Customer Ledger Entries", CustLedgerEntry);
                 end;
             }
-            action(ViewLifecycleEvents)
+            action(ViewPaymentEventHistory)
             {
-                Caption = 'View Lifecycle Events';
+                Caption = 'View Payment Event History';
                 ApplicationArea = All;
                 Image = History;
                 ToolTip = 'Open the chronological Adyen webhook and report events associated with this payment.';
@@ -151,7 +151,7 @@ page 72014 "Imported Adyen Payments"
                     EventEntry.SetCurrentKey("Merchant Account", "Payment PSP Reference", "Occurred At UTC");
                     EventEntry.SetRange("Merchant Account", Rec."Merchant Account");
                     EventEntry.SetRange("Payment PSP Reference", Rec."PSP Reference");
-                    Page.Run(Page::"Adyen Payment Lifecycle Events", EventEntry);
+                    Page.Run(Page::"Adyen Payment Event History", EventEntry);
                 end;
             }
         }
@@ -170,6 +170,6 @@ page 72014 "Imported Adyen Payments"
         EventEntry.SetCurrentKey("Merchant Account", "Payment PSP Reference", "Occurred At UTC");
         EventEntry.SetRange("Merchant Account", Rec."Merchant Account");
         EventEntry.SetRange("Payment PSP Reference", Rec."PSP Reference");
-        Page.Run(Page::"Adyen Payment Lifecycle Events", EventEntry);
+        Page.Run(Page::"Adyen Payment Event History", EventEntry);
     end;
 }

@@ -43,7 +43,7 @@ permissionset 72063 "ADYEN ADMIN"
         page "Adyen Merchants" = X,
         page "Adyen Webhook Requests" = X,
         page "Adyen Event Entries" = X,
-        page "Adyen Payment Lifecycle Events" = X,
+        page "Adyen Payment Event History" = X,
         page "Imported Adyen Payments" = X,
         page "Adyen Payment Exceptions" = X,
         page "Adyen Report Runs" = X,

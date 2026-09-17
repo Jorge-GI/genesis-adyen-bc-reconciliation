@@ -1674,24 +1674,24 @@
           <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Exceptions - Action CreateManualJournal - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4016759816 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>Adyen Payment Lifecycle Events</source>
+          <source>Adyen Payment Event History</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Lifecycle Events - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Event History - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4016759816 - Control 57786429 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Adyen Reason</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Lifecycle Events - Control Adyen Reason - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Event History - Control Adyen Reason - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 4016759816 - Action 1711048043 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the webhook request or report run from which the selected event originated.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Lifecycle Events - Action OpenSource - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Event History - Action OpenSource - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 4016759816 - Action 1711048043 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open Source</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Lifecycle Events - Action OpenSource - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Adyen Payment Event History - Action OpenSource - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 3804862920 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Adyen Payment Method Policies</source>
@@ -3041,12 +3041,12 @@
         <trans-unit id="Page 1676656878 - Action 849590544 - Property 1295455071" size-unit="char" translate="yes" xml:space="preserve">
           <source>Open the chronological Adyen webhook and report events associated with this payment.</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action ViewLifecycleEvents - Property ToolTip</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action ViewPaymentEventHistory - Property ToolTip</note>
         </trans-unit>
         <trans-unit id="Page 1676656878 - Action 849590544 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
-          <source>View Lifecycle Events</source>
+          <source>View Payment Event History</source>
           <note from="Developer" annotates="general" priority="2"></note>
-          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action ViewLifecycleEvents - Property Caption</note>
+          <note from="Xliff Generator" annotates="general" priority="3">Page Imported Adyen Payments - Action ViewPaymentEventHistory - Property Caption</note>
         </trans-unit>
         <trans-unit id="Page 820032825 - Property 2879900210" size-unit="char" translate="yes" xml:space="preserve">
           <source>Posted Adyen Payments</source>

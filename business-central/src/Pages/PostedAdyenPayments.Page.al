@@ -124,7 +124,7 @@ page 72024 "Posted Adyen Payments"
         EventEntry.SetCurrentKey("Merchant Account", "Payment PSP Reference", "Occurred At UTC");
         EventEntry.SetRange("Merchant Account", Rec."Merchant Account");
         EventEntry.SetRange("Payment PSP Reference", Rec."PSP Reference");
-        Page.Run(Page::"Adyen Payment Lifecycle Events", EventEntry);
+        Page.Run(Page::"Adyen Payment Event History", EventEntry);
     end;
 
     var

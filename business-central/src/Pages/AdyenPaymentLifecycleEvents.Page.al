@@ -1,9 +1,10 @@
-page 72025 "Adyen Payment Lifecycle Events"
+page 72025 "Adyen Payment Event History"
 {
     PageType = List;
-    Caption = 'Adyen Payment Lifecycle Events';
+    Caption = 'Adyen Payment Event History';
     SourceTable = "Adyen Event Entry";
     SourceTableView = sorting("Occurred At UTC", "Transport ID") order(descending);
+    UsageCategory = None;
     ApplicationArea = All;
     Editable = false;
     InsertAllowed = false;

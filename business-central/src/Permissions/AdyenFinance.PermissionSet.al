@@ -28,7 +28,7 @@ permissionset 72062 "ADYEN FINANCE"
         codeunit "Gen. Jnl.-Post Line" = X,
         page "Adyen Webhook Requests" = X,
         page "Adyen Event Entries" = X,
-        page "Adyen Payment Lifecycle Events" = X,
+        page "Adyen Payment Event History" = X,
         page "Imported Adyen Payments" = X,
         page "Adyen Payment Exceptions" = X,
         page "Adyen Report Runs" = X,
